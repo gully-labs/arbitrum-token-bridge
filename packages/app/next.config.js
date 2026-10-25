@@ -1,14 +1,11 @@
 // @ts-check type next.config.js
 
-/**
- * @type {import('next').NextConfig}
- **/
-
 // Gully: optional default chain pair for a site that serves one chain, e.g.
 // GULLY_DEFAULT_QUERY="sourceChain=arbitrum-sepolia&destinationChain=gully-chain-testnet".
 // Read at build time; `/` without chain query params redirects (temporary) to `/?<query>`.
 const gullyDefaultQuery = process.env.GULLY_DEFAULT_QUERY
 
+/** @type {import('next/dist/lib/load-custom-routes').Redirect[]} */
 const gullyDefaultPairRedirects = gullyDefaultQuery
   ? [
       {
@@ -23,6 +20,9 @@ const gullyDefaultPairRedirects = gullyDefaultQuery
     ]
   : []
 
+/**
+ * @type {import('next').NextConfig}
+ **/
 module.exports = {
   distDir: 'build',
   // Gully: GULLY_STANDALONE=1 (set in gully/Dockerfile) emits build/standalone for a small runtime image.
