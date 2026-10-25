@@ -1,18 +1,18 @@
 <!-- gully-header:start -->
-<a href="https://gullylabs.xyz/chain-kit"><img src="https://gullylabs.xyz/brand/repos/arbitrum-token-bridge.svg" alt="Gully Labs · Gully Bridge" width="100%"></a>
+<a href="https://gullychain.xyz"><img src="https://gullychain.xyz/brand/repos/arbitrum-token-bridge.svg" alt="GullyChain · Gully Bridge" width="100%"></a>
 
 <p align="center">
-  <a href="https://gullylabs.xyz"><img src="https://img.shields.io/badge/gullylabs.xyz-E8C060?style=for-the-badge&labelColor=0B0E13&logo=googlechrome&logoColor=E8C060" alt="Website"></a>
-  <a href="https://x.com/Gully_Labs"><img src="https://img.shields.io/badge/@Gully__Labs-0B0E13?style=for-the-badge&labelColor=0B0E13&logo=x&logoColor=white" alt="X"></a>
-  <a href="https://t.me/GullyLabsNews"><img src="https://img.shields.io/badge/Telegram-0B0E13?style=for-the-badge&labelColor=0B0E13&logo=telegram&logoColor=26A5E4" alt="Telegram"></a>
-  <a href="https://docs.gullylabs.xyz"><img src="https://img.shields.io/badge/Docs-0B0E13?style=for-the-badge&labelColor=0B0E13&logo=readthedocs&logoColor=E8C060" alt="Docs"></a>
-  <a href="https://gullylabs.xyz/chain-kit"><img src="https://img.shields.io/badge/Gully_Chains-0B0E13?style=for-the-badge&labelColor=0B0E13&logo=ethereum&logoColor=E8C060" alt="Gully Chains"></a>
-  <a href="https://github.com/gully-labs"><img src="https://img.shields.io/badge/GitHub-0B0E13?style=for-the-badge&labelColor=0B0E13&logo=github&logoColor=white" alt="GitHub"></a>
+  <a href="https://gullychain.xyz"><img src="https://img.shields.io/badge/gullychain.xyz-01D9FA?style=for-the-badge&labelColor=000000&logo=googlechrome&logoColor=000000" alt="Website"></a>
+  <a href="https://app.gullychain.xyz"><img src="https://img.shields.io/badge/App-0A0F1A?style=for-the-badge&labelColor=000000&logo=googlechrome&logoColor=01D9FA" alt="App"></a>
+  <a href="https://docs.gullychain.xyz"><img src="https://img.shields.io/badge/Docs-0A0F1A?style=for-the-badge&labelColor=000000&logo=readthedocs&logoColor=01D9FA" alt="Docs"></a>
+  <a href="https://x.com/Gully_Labs"><img src="https://img.shields.io/badge/@Gully__Labs-0A0F1A?style=for-the-badge&labelColor=000000&logo=x&logoColor=white" alt="X"></a>
+  <a href="https://t.me/GullyLabsNews"><img src="https://img.shields.io/badge/Telegram-0A0F1A?style=for-the-badge&labelColor=000000&logo=telegram&logoColor=26A5E4" alt="Telegram"></a>
+  <a href="https://github.com/gully-labs"><img src="https://img.shields.io/badge/GitHub-0A0F1A?style=for-the-badge&labelColor=000000&logo=github&logoColor=white" alt="GitHub"></a>
 </p>
 
-<p align="center"><b>Gully Bridge, coming with the Gully L3 testnet: move assets between a Gully chain and its parent chain.</b></p>
+<p align="center"><b>Gully Bridge: Bridge UI: deposit and withdraw between GullyChain and its parent chain.</b></p>
 
-<p align="center"><sub>Maintained by <a href="https://gullylabs.xyz">Gully Labs</a> as part of Gully Chains. Fork of <a href="https://github.com/OffchainLabs/arbitrum-token-bridge">OffchainLabs/arbitrum-token-bridge</a>, used under its Apache-2.0 licence. Not affiliated with or endorsed by Offchain Labs or the Arbitrum Foundation; Arbitrum is their trademark. Gully Bridge is coming with the Gully L3 testnet (planned); nothing is running yet.</sub></p>
+<p align="center"><sub>Maintained by <a href="https://gullylabs.xyz">Gully Labs</a> as part of <a href="https://gullychain.xyz">GullyChain</a>. Fork of <a href="https://github.com/OffchainLabs/arbitrum-token-bridge">OffchainLabs/arbitrum-token-bridge</a>, used under its Apache-2.0 licence. Not affiliated with or endorsed by Offchain Labs.</sub></p>
 
 ---
 <!-- gully-header:end -->
