@@ -12,7 +12,7 @@ import { getBridgeUiConfigForChain } from './bridgeUiConfig'
 import { Erc20Data, fetchErc20Data } from './TokenUtils'
 import { orbitChains } from './orbitChainsList'
 import { ChainId } from '../types/ChainId'
-import { getRpcUrl } from './rpc/getRpcUrl'
+import { getRpcUrl, ProductionChainId } from './rpc/getRpcUrl'
 import {
   defaultL2Network,
   defaultL3Network,
@@ -240,39 +240,51 @@ export const localL3NetworkRpcUrl = loadEnvironmentVariableWithFallback({
   fallback: 'http://127.0.0.1:3347'
 })
 
+// Gully: only build the Infura/Alchemy URL when no explicit RPC URL is set. Upstream evaluated the provider
+// fallback eagerly, which throws at build time when the env has public RPC URLs but no provider key.
+function rpcUrlFromEnvOrProvider(
+  env: string | undefined,
+  chainId: ProductionChainId
+): string {
+  if (typeof env === 'string' && env.trim() !== '') {
+    return env
+  }
+  return getRpcUrl(chainId)
+}
+
 const defaultRpcUrls: { [chainId: number]: string } = {
   // L1 Mainnet
-  [ChainId.Ethereum]: loadEnvironmentVariableWithFallback({
-    env: process.env.NEXT_PUBLIC_RPC_URL_ETHEREUM,
-    fallback: getRpcUrl(ChainId.Ethereum)
-  }),
+  [ChainId.Ethereum]: rpcUrlFromEnvOrProvider(
+    process.env.NEXT_PUBLIC_RPC_URL_ETHEREUM,
+    ChainId.Ethereum
+  ),
   // L1 Testnet
-  [ChainId.Sepolia]: loadEnvironmentVariableWithFallback({
-    env: process.env.NEXT_PUBLIC_RPC_URL_SEPOLIA,
-    fallback: getRpcUrl(ChainId.Sepolia)
-  }),
+  [ChainId.Sepolia]: rpcUrlFromEnvOrProvider(
+    process.env.NEXT_PUBLIC_RPC_URL_SEPOLIA,
+    ChainId.Sepolia
+  ),
   // L2 Mainnet
-  [ChainId.ArbitrumOne]: loadEnvironmentVariableWithFallback({
-    env: process.env.NEXT_PUBLIC_RPC_URL_ARBITRUM_ONE,
-    fallback: getRpcUrl(ChainId.ArbitrumOne)
-  }),
-  [ChainId.ArbitrumNova]: loadEnvironmentVariableWithFallback({
-    env: process.env.NEXT_PUBLIC_RPC_URL_ARBITRUM_NOVA,
-    fallback: getRpcUrl(ChainId.ArbitrumNova)
-  }),
-  [ChainId.Base]: loadEnvironmentVariableWithFallback({
-    env: process.env.NEXT_PUBLIC_RPC_URL_BASE,
-    fallback: getRpcUrl(ChainId.Base)
-  }),
+  [ChainId.ArbitrumOne]: rpcUrlFromEnvOrProvider(
+    process.env.NEXT_PUBLIC_RPC_URL_ARBITRUM_ONE,
+    ChainId.ArbitrumOne
+  ),
+  [ChainId.ArbitrumNova]: rpcUrlFromEnvOrProvider(
+    process.env.NEXT_PUBLIC_RPC_URL_ARBITRUM_NOVA,
+    ChainId.ArbitrumNova
+  ),
+  [ChainId.Base]: rpcUrlFromEnvOrProvider(
+    process.env.NEXT_PUBLIC_RPC_URL_BASE,
+    ChainId.Base
+  ),
   // L2 Testnet
-  [ChainId.ArbitrumSepolia]: loadEnvironmentVariableWithFallback({
-    env: process.env.NEXT_PUBLIC_RPC_URL_ARBITRUM_SEPOLIA,
-    fallback: getRpcUrl(ChainId.ArbitrumSepolia)
-  }),
-  [ChainId.BaseSepolia]: loadEnvironmentVariableWithFallback({
-    env: process.env.NEXT_PUBLIC_RPC_URL_BASE_SEPOLIA,
-    fallback: getRpcUrl(ChainId.BaseSepolia)
-  })
+  [ChainId.ArbitrumSepolia]: rpcUrlFromEnvOrProvider(
+    process.env.NEXT_PUBLIC_RPC_URL_ARBITRUM_SEPOLIA,
+    ChainId.ArbitrumSepolia
+  ),
+  [ChainId.BaseSepolia]: rpcUrlFromEnvOrProvider(
+    process.env.NEXT_PUBLIC_RPC_URL_BASE_SEPOLIA,
+    ChainId.BaseSepolia
+  )
 }
 
 export const rpcURLs: { [chainId: number]: string } =
