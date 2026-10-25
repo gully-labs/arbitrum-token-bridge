@@ -1550,7 +1550,7 @@
         "childWethGateway": "0xB8BAAd59F553707534F546983912486562FA0Eb3"
       },
       "bridgeUiConfig": {
-        "color": "#E8C060",
+        "color": "#01D9FA",
         "network": {
           "name": "Gully Chain Testnet",
           "logo": "/images/GullyChainLogo.png",

@@ -10,29 +10,37 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
+        // GullyChain kit gradients
+        gcChain: 'linear-gradient(90deg,#1567F9 0%,#0F89F7 35%,#01D9FA 100%)',
+        gcIcon: 'linear-gradient(180deg,#01D9F9 0%,#2E36F7 100%)',
+        gcMascotFade:
+          'linear-gradient(90deg, #000 40%, rgba(0,0,0,.6) 58%, transparent 80%)',
         gradient:
-          'linear-gradient(90deg, rgba(40, 160, 240, 0.5) 1.46%, rgba(239, 130, 32, 0.5) 98.51%)',
+          'linear-gradient(90deg, rgba(21, 103, 249, 0.5) 0%, rgba(1, 217, 250, 0.5) 100%)',
         gradientCctp: 'linear-gradient(95deg, #77E8CB 0%, #A199F7 100%)',
-        gradientCelebration: 'linear-gradient(to right, #1B4ADD6F, #E573106F)',
+        gradientCelebration: 'linear-gradient(to right, #1567F96F, #01D9FA6F)',
         highlight:
           'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.1) 75%, rgba(255, 255, 255, 0))'
       },
       colors: {
-        // GULLY BRAND (Gully Labs brand kit, tokens.css). Re-skins the upstream palette below in place;
-        // every upstream colour name is kept so merges stay conflict-light.
-        black: '#0D141C', // lab-night: page background
-        white: '#F4F2EC', // bone: text on dark
-        'lab-night': '#0D141C',
-        midnight: '#151D28',
-        slate: '#2A3542',
-        bone: '#F4F2EC',
-        'lab-gold': '#D9B563',
-        'pale-gold': '#F2D58A',
-        'frog-green': '#2F6B35',
+        // GULLYCHAIN BRAND (brand kit v2, CLAUDE_PROMPT.md section 2). Re-skins the upstream palette below
+        // in place; every upstream colour name is kept so merges stay conflict-light.
+        black: '#000000', // Void Black: page ground
+        white: '#FFFFFF',
+        'gc-black': '#000000',
+        'gc-night': '#0A0F1A',
+        'gc-line': '#16213A',
+        'gc-royal': '#1567F9',
+        'gc-electric': '#0F89F7',
+        'gc-cyan': '#01D9FA',
+        'gc-indigo': '#2E36F7',
+        'gc-muted': '#9FB3CC',
+        'gc-up': '#2E7D32',
+        'gc-down': '#C0392B',
 
         // ACTION
-        error: '#CD0000',
-        'blue-link': '#D9B563',
+        error: '#C0392B',
+        'blue-link': '#01D9FA',
 
         // PRIMARY
         cyan: '#DDEAFA',
@@ -40,41 +48,41 @@ module.exports = {
         orange: '#FFEED3',
         lime: '#E8FFE4',
         lilac: '#754562',
-        blue: '#00FBFF',
+        blue: '#01D9FA',
 
         // SECONDARY
-        'cyan-dark': '#11365E',
+        'cyan-dark': '#0E1A33',
         'brick-dark': '#762716',
         'orange-dark': '#60461F',
-        'lime-dark': '#2F6B35',
+        'lime-dark': '#1F5A23',
 
         // TRANSACTION STATUS COLORS
         claim: '#6AD28A',
-        retry: '#CD0000',
+        retry: '#C0392B',
         pending: '#CCB069',
 
         // NEUTRAL (GRAYS)
-        'gray-1': '#151D28',
+        'gray-1': '#0A0F1A',
         'gray-2': '#E5E5E5',
         'gray-3': '#DADADA',
         'gray-4': '#CCCCCC',
-        'gray-5': '#AEAEAE',
+        'gray-5': '#9FB3CC',
         'gray-6': '#999999',
         'gray-7': '#BDBDBD',
-        'gray-8': '#2A3542',
+        'gray-8': '#16213A',
         'gray-dark': '#6D6D6D',
         'line-gray': '#F4F4F4',
-        dark: '#151D28', // (or default-black)
-        'dark-hover': '#1D2836', // (or default-black-hover)
+        dark: '#0A0F1A', // (or default-black)
+        'dark-hover': '#111A2E', // (or default-black-hover)
 
-        'bg-gray-1': '#151D28',
+        'bg-gray-1': '#0A0F1A',
 
         // BRAND
-        'eth-dark': '#1A1C33',
-        'ocl-blue': '#243145',
-        'atmosphere-blue': '#152C4E',
-        'widget-background': 'var(--color-widget-background, #151D28)',
-        'primary-cta': 'var(--color-primary-cta, #D9B563)'
+        'eth-dark': '#0A0F1A',
+        'ocl-blue': '#16213A',
+        'atmosphere-blue': '#0E1A33',
+        'widget-background': 'var(--color-widget-background, #0A0F1A)',
+        'primary-cta': 'var(--color-primary-cta, #01D9FA)'
       },
       spacing: {
         1: '5px',
@@ -111,9 +119,20 @@ module.exports = {
         80: '400px'
       },
       fontFamily: {
-        // Gully display face (Barlow Condensed 700, uppercase) and label face (JetBrains Mono); see Font.ts
-        gullyDisplay: ['var(--font-gully-display)', 'Barlow Condensed', 'sans-serif'],
-        gullyMono: ['var(--font-gully-mono)', 'JetBrains Mono', 'monospace'],
+        // GullyChain faces (see Font.ts): Poppins display, Barlow Condensed labels, IBM Plex Sans numbers,
+        // Montserrat tagline. Body is Hanken Grotesk through `unica77`.
+        gullyDisplay: ['var(--font-gully-display)', 'Poppins', 'sans-serif'],
+        gullyLabel: [
+          'var(--font-gully-label)',
+          'Barlow Condensed',
+          'sans-serif'
+        ],
+        gullyNumbers: [
+          'var(--font-gully-numbers)',
+          'IBM Plex Sans',
+          'sans-serif'
+        ],
+        gullyTagline: ['var(--font-gully-tagline)', 'Montserrat', 'sans-serif'],
         unica77: ['var(--font-unica77)'],
         theme: ['var(--font-family, var(--font-unica77), Roboto, sans-serif)']
       },
@@ -130,7 +149,9 @@ module.exports = {
         8: '2rem'
       },
       borderRadius: {
-        DEFAULT: 'var(--border-radius, 6px)'
+        DEFAULT: 'var(--border-radius, 22px)',
+        card: '22px',
+        pill: '9999px'
       },
       borderWidth: {
         DEFAULT: 'var(--border-width, 1px)'
@@ -142,6 +163,11 @@ module.exports = {
         2: '0px 0px 1px 0px rgba(33, 37, 41, 0.08), 0px 2px 2px 0px rgba(33, 37, 41, 0.06)'
       },
       keyframes: {
+        // Gully: a new row in the live transfers list slides in (motion-safe only)
+        'gc-row-in': {
+          '0%': { opacity: 0, transform: 'translateY(-6px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' }
+        },
         'blink-pulse': {
           '0%, 100%': {
             opacity: 1
@@ -152,6 +178,7 @@ module.exports = {
         }
       },
       animation: {
+        'gc-row-in': 'gc-row-in 400ms ease-out 1',
         blink: 'blink-pulse 1s ease-in-out 1',
         blinkInfinite: 'blink-pulse 1s ease-in-out infinite'
       },

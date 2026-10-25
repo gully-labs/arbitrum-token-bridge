@@ -1,5 +1,6 @@
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 
+import { Wallet } from 'lucide-react'
 import { Button } from '../common/Button'
 
 export function ConnectWalletButton({ onClick }: { onClick?: () => void }) {
@@ -9,7 +10,9 @@ export function ConnectWalletButton({ onClick }: { onClick?: () => void }) {
     <Button
       variant="primary"
       onClick={onClick ?? openConnectModal}
-      className="w-full border border-primary-cta bg-primary-cta py-3 text-lg text-lab-night hover:!bg-pale-gold lg:text-2xl"
+      icon={<Wallet size={20} strokeWidth={1.75} aria-hidden />}
+      showArrow
+      className="w-full py-3 text-lg lg:text-2xl"
     >
       <span className="block w-full truncate">Connect Wallet</span>
     </Button>

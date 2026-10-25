@@ -11,6 +11,8 @@ import { useBalanceUpdater } from '../syncers/useBalanceUpdater'
 import { useArbQueryParams } from '../../hooks/useArbQueryParams'
 import { useMode } from '../../hooks/useMode'
 import { RecoverFunds } from '../RecoverFunds'
+import { GullyActivityPanel } from '../../gully/activity/GullyActivityPanel'
+import { GullyStepper } from '../../gully/GullyStepper'
 
 export function MainContent() {
   const [isArbitrumStatsVisible] =
@@ -37,6 +39,8 @@ export function MainContent() {
       <RecoverFunds />
 
       <div className="main-panel mx-auto flex w-full flex-col items-center gap-3 sm:pt-6">
+        {/* Gully: the bridge flow at a glance (Connect, Amount, Confirm, Track) */}
+        <GullyStepper className="w-full px-4 sm:max-w-[600px] sm:px-0" />
         <Tab.Group as={Fragment} selectedIndex={tab} onChange={setSelectedTab}>
           <TopNavBar />
           <Tab.Panels className="flex w-full items-center justify-center">
@@ -48,6 +52,10 @@ export function MainContent() {
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>
+        {/* Gully: on phones the activity panel sits under the bridge (desktop shows it in the sidebar) */}
+        <div className="w-full px-4 pb-8 sm:hidden">
+          <GullyActivityPanel />
+        </div>
       </div>
 
       {/* Settings panel */}

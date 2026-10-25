@@ -15,17 +15,25 @@ import { INTEGRATOR_ID } from '@/bridge/app/api/crosschain-transfers/lifi'
 
 const rainbowkitTheme = merge(darkTheme(), {
   colors: {
-    // Gully brand: lab-gold accent with lab-night text, midnight surfaces, slate lines
-    accentColor: '#D9B563',
-    accentColorForeground: '#0D141C',
-    modalBackground: '#151D28',
-    modalBorder: '#2A3542',
-    generalBorder: '#2A3542',
-    modalText: '#F4F2EC',
-    modalTextSecondary: '#AEB5BE',
-    menuItemBackground: '#1D2836',
-    connectButtonBackground: '#151D28',
-    connectButtonText: '#F4F2EC'
+    // GullyChain kit: cyan primary action with black text, night surfaces, 1px line borders, muted text
+    accentColor: '#01D9FA',
+    accentColorForeground: '#000000',
+    modalBackground: '#0A0F1A',
+    modalBorder: '#16213A',
+    generalBorder: '#16213A',
+    modalText: '#FFFFFF',
+    modalTextSecondary: '#9FB3CC',
+    menuItemBackground: '#111A2E',
+    connectButtonBackground: '#0A0F1A',
+    connectButtonText: '#FFFFFF'
+  },
+  radii: {
+    // pills for buttons, 22px for cards/modals
+    actionButton: '9999px',
+    connectButton: '9999px',
+    menuButton: '9999px',
+    modal: '22px',
+    modalMobile: '22px'
   },
   fonts: {
     body: 'var(--font-family, var(--font-unica77), Roboto, sans-serif)'

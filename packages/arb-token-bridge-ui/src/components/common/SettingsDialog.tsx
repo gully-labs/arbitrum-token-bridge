@@ -1,4 +1,5 @@
 import { twMerge } from 'tailwind-merge'
+import { Activity, PlusCircle } from 'lucide-react'
 import useLocalStorage from '@rehooks/local-storage'
 
 import { statsLocalStorageKey } from '../MainContent/ArbitrumStats'
@@ -11,12 +12,22 @@ import { ORBIT_QUICKSTART_LINK } from '../../constants'
 
 const SectionTitle = ({
   className,
+  icon,
   children
 }: {
   className?: string
+  icon?: React.ReactNode
   children: React.ReactNode
 }) => (
-  <div className={twMerge('heading mb-4 text-lg', className)}>{children}</div>
+  <div
+    className={twMerge(
+      'heading font-gully-display mb-4 flex items-center gap-2 text-lg',
+      className
+    )}
+  >
+    {icon && <span className="text-gc-cyan">{icon}</span>}
+    {children}
+  </div>
 )
 
 export const SettingsDialog = () => {
@@ -48,7 +59,11 @@ export const SettingsDialog = () => {
       <div className="flex w-full flex-col items-center gap-6 text-white">
         {/* Arbitrum stats toggle */}
         <div className="w-full">
-          <SectionTitle>Stats</SectionTitle>
+          <SectionTitle
+            icon={<Activity size={20} strokeWidth={1.75} aria-hidden />}
+          >
+            Stats
+          </SectionTitle>
 
           <Switch
             label="Show Network Stats"
@@ -63,7 +78,12 @@ export const SettingsDialog = () => {
 
         {/* Add custom chain */}
         <div className="w-full transition-opacity">
-          <SectionTitle className="mb-1">Add Custom Orbit Chain</SectionTitle>
+          <SectionTitle
+            className="mb-1"
+            icon={<PlusCircle size={20} strokeWidth={1.75} aria-hidden />}
+          >
+            Add Custom Orbit Chain
+          </SectionTitle>
           <p className="mb-4 text-sm">
             Add in your own Orbit chain to the bridge. This will only be for
             local testing, other users will not see it.

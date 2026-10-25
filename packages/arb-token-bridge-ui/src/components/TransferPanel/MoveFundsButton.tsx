@@ -1,4 +1,5 @@
 import { twMerge } from 'tailwind-merge'
+import { ArrowLeftRight } from 'lucide-react'
 
 import { useNetworks } from '../../hooks/useNetworks'
 import { getBridgeUiConfigForChain } from '../../util/bridgeUiConfig'
@@ -40,10 +41,13 @@ export function MoveFundsButton({ onClick }: MoveFundsButtonProps) {
       loading={isTransferring}
       disabled={isDisabled}
       onClick={onClick}
+      // Gully: solid chain colour (cyan for GullyChain) so the kit's black button text stays readable
       style={{
         borderColor: theme.primaryCtaColor ?? destinationChainUIcolor,
-        backgroundColor: `${theme.primaryCtaColor ?? destinationChainUIcolor}66`
+        backgroundColor: theme.primaryCtaColor ?? destinationChainUIcolor
       }}
+      icon={<ArrowLeftRight size={20} strokeWidth={1.75} aria-hidden />}
+      showArrow
       className={twMerge(
         'w-full border bg-primary-cta py-3 text-lg',
         'disabled:!border-white/10 disabled:!bg-white/10',
