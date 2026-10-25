@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
-import ArbitrumLogoSmall from '@/images/ArbitrumLogo.svg'
 import { useAccount } from 'wagmi'
 
 import { isNetwork } from '../../util/networks'
@@ -12,6 +11,7 @@ import { isExperimentalModeEnabled } from '../../util'
 import { HeaderAccountPopover } from './HeaderAccountPopover'
 import { HeaderConnectWalletButton } from './HeaderConnectWalletButton'
 import { useMode } from '../../hooks/useMode'
+import { GULLY, GULLY_MARK_SRC } from '../../gully/brand'
 
 export function HeaderAccountOrConnectWalletButton() {
   const { isConnected } = useAccount()
@@ -50,10 +50,14 @@ export function Header({ children }: { children?: React.ReactNode }) {
       }}
     >
       <div className="flex w-full items-center justify-end gap-2 text-white">
+        {/* Gully: the kit's mascot mark (min 32px per the kit) replaces the Arbitrum mark */}
         <Image
-          className="mr-auto h-6 w-6 sm:hidden"
-          src={ArbitrumLogoSmall}
-          alt="Arbitrum"
+          className="mr-auto h-8 w-auto sm:hidden"
+          src={GULLY_MARK_SRC}
+          alt={GULLY.name}
+          width={440}
+          height={420}
+          unoptimized
         />
         {isTestnet && !isExperimentalMode && (
           <span className="grow font-medium">TESTNET MODE</span>

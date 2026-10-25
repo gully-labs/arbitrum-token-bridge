@@ -15,7 +15,22 @@
   --toastify-text-color-error: #1a1c1d;
   --toastify-font-family: var(--font-family, var(--font-unica77), Roboto, sans-serif);
   --toastify-toast-min-height: 44px;
-  --blue-link: #1366C1;
+  --blue-link: #D9B563;
+
+  /* Gully brand tokens: copied from the Gully Labs brand kit (brand/tokens.css). Colours are wired
+     into Tailwind in the root tailwind.config.js; fonts in components/common/Font.ts. */
+  --gl-lab-night: #0D141C;
+  --gl-midnight: #151D28;
+  --gl-slate: #2A3542;
+  --gl-bone: #F4F2EC;
+  --gl-lab-gold: #D9B563;
+  --gl-pale-gold: #F2D58A;
+  --gl-frog-green: #2F6B35;
+  --gl-moss: #3C553B;
+  --gl-text-muted: #AEB5BE;
+  --gl-text-dim: #7D8794;
+  --gl-radius-btn: 6px;
+  --gl-radius-card: 16px;
 }
 
 *:focus-visible, button:focus-visible, input:focus-visible {
@@ -73,6 +88,14 @@ body {
   @apply min-h-screen;
   @apply bg-black;
   font-weight: 300;
+}
+
+/* Gully: display headings use Barlow Condensed 700 uppercase; labels use JetBrains Mono */
+.font-gully-display {
+  font-family: var(--font-gully-display), 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.9;
 }
 
 /*** HIDE NUMBER INPUT STEPS BUTTONS ****/

@@ -18,9 +18,21 @@ module.exports = {
           'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.1) 75%, rgba(255, 255, 255, 0))'
       },
       colors: {
+        // GULLY BRAND (Gully Labs brand kit, tokens.css). Re-skins the upstream palette below in place;
+        // every upstream colour name is kept so merges stay conflict-light.
+        black: '#0D141C', // lab-night: page background
+        white: '#F4F2EC', // bone: text on dark
+        'lab-night': '#0D141C',
+        midnight: '#151D28',
+        slate: '#2A3542',
+        bone: '#F4F2EC',
+        'lab-gold': '#D9B563',
+        'pale-gold': '#F2D58A',
+        'frog-green': '#2F6B35',
+
         // ACTION
         error: '#CD0000',
-        'blue-link': '#1366C1',
+        'blue-link': '#D9B563',
 
         // PRIMARY
         cyan: '#DDEAFA',
@@ -34,7 +46,7 @@ module.exports = {
         'cyan-dark': '#11365E',
         'brick-dark': '#762716',
         'orange-dark': '#60461F',
-        'lime-dark': '#31572A',
+        'lime-dark': '#2F6B35',
 
         // TRANSACTION STATUS COLORS
         claim: '#6AD28A',
@@ -42,27 +54,27 @@ module.exports = {
         pending: '#CCB069',
 
         // NEUTRAL (GRAYS)
-        'gray-1': '#191919',
+        'gray-1': '#151D28',
         'gray-2': '#E5E5E5',
         'gray-3': '#DADADA',
         'gray-4': '#CCCCCC',
         'gray-5': '#AEAEAE',
         'gray-6': '#999999',
         'gray-7': '#BDBDBD',
-        'gray-8': '#262626',
+        'gray-8': '#2A3542',
         'gray-dark': '#6D6D6D',
         'line-gray': '#F4F4F4',
-        dark: '#1A1C1D', // (or default-black)
-        'dark-hover': '#2b2e30', // (or default-black-hover)
+        dark: '#151D28', // (or default-black)
+        'dark-hover': '#1D2836', // (or default-black-hover)
 
-        'bg-gray-1': '#191919',
+        'bg-gray-1': '#151D28',
 
         // BRAND
         'eth-dark': '#1A1C33',
         'ocl-blue': '#243145',
         'atmosphere-blue': '#152C4E',
-        'widget-background': 'var(--color-widget-background, #191919)',
-        'primary-cta': 'var(--color-primary-cta, #31572A)'
+        'widget-background': 'var(--color-widget-background, #151D28)',
+        'primary-cta': 'var(--color-primary-cta, #D9B563)'
       },
       spacing: {
         1: '5px',
@@ -99,6 +111,9 @@ module.exports = {
         80: '400px'
       },
       fontFamily: {
+        // Gully display face (Barlow Condensed 700, uppercase) and label face (JetBrains Mono); see Font.ts
+        gullyDisplay: ['var(--font-gully-display)', 'Barlow Condensed', 'sans-serif'],
+        gullyMono: ['var(--font-gully-mono)', 'JetBrains Mono', 'monospace'],
         unica77: ['var(--font-unica77)'],
         theme: ['var(--font-family, var(--font-unica77), Roboto, sans-serif)']
       },
@@ -115,7 +130,7 @@ module.exports = {
         8: '2rem'
       },
       borderRadius: {
-        DEFAULT: 'var(--border-radius, 5px)'
+        DEFAULT: 'var(--border-radius, 6px)'
       },
       borderWidth: {
         DEFAULT: 'var(--border-width, 1px)'

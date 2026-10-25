@@ -15,10 +15,20 @@ import { INTEGRATOR_ID } from '@/bridge/app/api/crosschain-transfers/lifi'
 
 const rainbowkitTheme = merge(darkTheme(), {
   colors: {
-    accentColor: 'var(--blue-link)'
+    // Gully brand: lab-gold accent with lab-night text, midnight surfaces, slate lines
+    accentColor: '#D9B563',
+    accentColorForeground: '#0D141C',
+    modalBackground: '#151D28',
+    modalBorder: '#2A3542',
+    generalBorder: '#2A3542',
+    modalText: '#F4F2EC',
+    modalTextSecondary: '#AEB5BE',
+    menuItemBackground: '#1D2836',
+    connectButtonBackground: '#151D28',
+    connectButtonText: '#F4F2EC'
   },
   fonts: {
-    body: 'Roboto, sans-serif'
+    body: 'var(--font-family, var(--font-unica77), Roboto, sans-serif)'
   }
 } as Theme)
 

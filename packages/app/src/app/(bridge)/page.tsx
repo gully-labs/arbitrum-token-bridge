@@ -6,6 +6,7 @@ import {
 } from '@/bridge/types/ChainQueryParam'
 
 import { isNetwork, registerLocalNetwork } from '@/bridge/util/networks'
+import { GULLY } from '@/bridge/gully/brand'
 import BridgeClient from './BridgeClient'
 import {
   decodeChainQueryParam,
@@ -63,21 +64,19 @@ export async function generateMetadata({
     destinationChainInfo.id
   )
 
-  const siteTitle = `Bridge to ${destinationChainInfo.name}`
-  const siteDescription = `Bridge from ${sourceChainInfo.name} to ${destinationChainInfo.name} using the Arbitrum Bridge. Built to scale Ethereum, Arbitrum brings you 10x lower costs while inheriting Ethereum's security model. Arbitrum is a Layer 2 Optimistic Rollup.`
-  const siteDomain = 'https://bridge.arbitrum.io'
+  const siteTitle = `Bridge to ${destinationChainInfo.name} | ${GULLY.name}`
+  const siteDescription = `Bridge from ${sourceChainInfo.name} to ${destinationChainInfo.name} using ${GULLY.name}. ${GULLY.description}`
+  const siteDomain = GULLY.siteUrl
 
-  let metaImagePath = `${sourceChainInfo.id}-to-${destinationChainInfo.id}.jpg`
-
-  if (isSourceOrbitChain) {
-    metaImagePath = `${sourceChainInfo.id}.jpg`
-  }
-
-  if (isDestinationOrbitChain) {
-    metaImagePath = `${destinationChainInfo.id}.jpg`
-  }
-
-  const imageUrl = `${siteDomain}/images/__auto-generated/open-graph/${metaImagePath}`
+  // Gully: one share image, made from the brand kit (upstream generates per-chain Arbitrum-branded ones).
+  // To get them back, restore the lines below and the generateOpenGraphImages script.
+  // let metaImagePath = `${sourceChainInfo.id}-to-${destinationChainInfo.id}.jpg`
+  // if (isSourceOrbitChain) metaImagePath = `${sourceChainInfo.id}.jpg`
+  // if (isDestinationOrbitChain) metaImagePath = `${destinationChainInfo.id}.jpg`
+  // const imageUrl = `${siteDomain}/images/__auto-generated/open-graph/${metaImagePath}`
+  void isSourceOrbitChain
+  void isDestinationOrbitChain
+  const imageUrl = `${siteDomain}/og-image.jpg`
 
   return {
     title: siteTitle,

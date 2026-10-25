@@ -4,9 +4,9 @@ import { unica } from '../components/common/Font'
 import { ThemeConfig } from '../util/queryParamUtils'
 
 export const defaultTheme: ThemeConfig = {
-  borderRadius: '5px',
+  borderRadius: '6px', // Gully brand: 6px buttons
   borderWidth: '1px',
-  widgetBackgroundColor: '#191919',
+  widgetBackgroundColor: '#151D28', // Gully brand: midnight
   fontFamily: `${unica.style.fontFamily}, Roboto, sans-serif`
 }
 

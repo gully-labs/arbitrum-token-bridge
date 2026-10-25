@@ -1,7 +1,13 @@
 {
-  "short_name": "Arb Bridge",
-  "name": "Arbitrum Token Bridge",
+  "short_name": "Gully Bridge",
+  "name": "Gully Bridge",
+  "description": "Move assets between a Gully chain and its parent chain.",
   "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
     {
       "src": "logo.png",
       "sizes": "512x512",
@@ -10,6 +16,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0D141C",
+  "background_color": "#0D141C"
 }
