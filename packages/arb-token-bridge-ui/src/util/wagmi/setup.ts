@@ -9,7 +9,9 @@ import {
 import {
   trustWallet,
   okxWallet,
-  rabbyWallet
+  rabbyWallet,
+  injectedWallet,
+  coinbaseWallet
 } from '@rainbow-me/rainbowkit/wallets'
 
 import {
@@ -30,6 +32,7 @@ import { getCustomChainsFromLocalStorage, rpcURLs } from '../networks'
 import { ChainId } from '../../types/ChainId'
 import { getOrbitChains } from '../orbitChainsList'
 import { getWagmiChain } from './getWagmiChain'
+import { GULLY } from '../../gully/brand'
 import { _chains } from '@rainbow-me/rainbowkit/dist/config/getDefaultConfig'
 
 const customChains = getCustomChainsFromLocalStorage().map(chain =>
@@ -88,11 +91,13 @@ const chainList = getChainList()
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!
 
 if (!projectId) {
-  console.error('NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID variable missing.')
+  console.error(
+    'NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID variable missing, WalletConnect disabled (browser wallets only).'
+  )
 }
 
 const appInfo = {
-  appName: 'Bridge to Arbitrum',
+  appName: GULLY.name,
   projectId
 }
 
@@ -161,6 +166,13 @@ export function getProps(targetChainKey: string | null) {
     return cachedProps
   }
 
+  // Gully: without a WalletConnect project id RainbowKit's default wallets throw at startup, so fall back to
+  // browser (injected) wallets only. No WalletConnect id is shipped in the repo.
+  if (!projectId) {
+    cachedProps = getInjectedOnlyProps(targetChainKey)
+    return cachedProps
+  }
+
   const config = getDefaultConfig({
     // Wagmi selects the first chain as the one to target in WalletConnect, so it has to be the first in the array.
     //
@@ -200,4 +212,31 @@ export function getProps(targetChainKey: string | null) {
 
   cachedProps = wagmiConfig
   return cachedProps
+}
+
+function getInjectedOnlyProps(targetChainKey: string | null) {
+  const chains = getChains(sanitizeTargetChainKey(targetChainKey))
+
+  const connectors = connectorsForWallets(
+    [
+      {
+        groupName: 'Browser wallets',
+        wallets: [injectedWallet, rabbyWallet, coinbaseWallet]
+      }
+    ],
+    { appName: appInfo.appName, projectId: '' }
+  )
+
+  const transports = chains.reduce((acc, chain) => {
+    acc[chain.id] = http(rpcURLs[chain.id] ?? chain.rpcUrls.default.http[0])
+    return acc
+  }, {} as Record<number, ReturnType<typeof http>>)
+
+  return createConfig({
+    chains,
+    batch: { multicall: true },
+    ssr: true,
+    connectors,
+    transports
+  })
 }

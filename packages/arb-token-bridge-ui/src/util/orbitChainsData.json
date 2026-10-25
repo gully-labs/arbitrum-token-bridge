@@ -1517,6 +1517,48 @@
   ],
   "testnet": [
     {
+      "chainId": 485590,
+      "confirmPeriodBlocks": 150,
+      "ethBridge": {
+        "bridge": "0x2073106fd3fc844Bbde31f5Bf0BB91cf1e2d6C8A",
+        "inbox": "0x7B8499f1C058c9bdE2Bc9BdFEBE40364232C52B5",
+        "outbox": "0x976C651fe5E63E45C8C28449507F51548922f68c",
+        "rollup": "0x85D80C06Fa5334E8Cd1C51F3F39D477E5dc35E0D",
+        "sequencerInbox": "0x483f77f692635d4D8a8147D0f732A016614Ce685"
+      },
+      "explorerUrl": "https://testnet-explorer.gullychain.xyz",
+      "rpcUrl": "https://testnet-rpc.gullychain.xyz",
+      "name": "Gully Chain Testnet",
+      "slug": "gully-chain-testnet",
+      "parentChainId": 421614,
+      "isCustom": true,
+      "isTestnet": true,
+      "tokenBridge": {
+        "parentCustomGateway": "0xA90752f7057dc1BFe2677f1791c5084535A4E42a",
+        "parentErc20Gateway": "0x8E35E523bFd709d577A77F749c831cB045bCabd0",
+        "parentGatewayRouter": "0xfbd7503009AB4ee5A1f980a2fCDEE4C7BEB6b2B9",
+        "parentMultiCall": "0xce1CAd780c529e66e3aa6D952a1ED9A6447791c1",
+        "parentProxyAdmin": "0x8f1CA0808eAD8321370a610050EBee79Cd448D69",
+        "parentWeth": "0x980B62Da83eFf3D4576C647993b0c1D7faf17c73",
+        "parentWethGateway": "0xEB602d8Fc5F5d87DA629201905bE51885165EC4f",
+        "childCustomGateway": "0x27530E706c67F210753081508302d69ba1693A41",
+        "childErc20Gateway": "0x5CbA5BFD52beA26Fb65c26Fa452f290cB8610fE2",
+        "childGatewayRouter": "0x32C680cA4c27A3566fE5Dfd4643fE420eE1039B7",
+        "childMultiCall": "0xc0Dee8709648264495af14c65fEA2Ae7a728E01a",
+        "childProxyAdmin": "0x74e732Bfe2e341BD87939D2b256562bEc6fa3537",
+        "childWeth": "0x3292dE74305DF64dbe082c6834fa841353eB2415",
+        "childWethGateway": "0xB8BAAd59F553707534F546983912486562FA0Eb3"
+      },
+      "bridgeUiConfig": {
+        "color": "#E8C060",
+        "network": {
+          "name": "Gully Chain Testnet",
+          "logo": "/images/GullyChainLogo.png",
+          "description": "The testnet of Gully Chain, the Gully Labs L3 on Arbitrum Sepolia."
+        }
+      }
+    },
+    {
       "chainId": 37714555429,
       "confirmPeriodBlocks": 150,
       "ethBridge": {

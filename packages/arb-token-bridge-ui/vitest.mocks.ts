@@ -7,3 +7,19 @@ vi.mock('next/font/local', () => ({
     }
   }))
 }))
+
+// Gully: the brand fonts come from next/font/google (Barlow, Barlow Condensed, JetBrains Mono).
+vi.mock('next/font/google', () => {
+  const font = vi.fn(() => ({
+    className: '',
+    variable: '',
+    style: {
+      fontFamily: 'Roboto, sans-serif'
+    }
+  }))
+  return {
+    Barlow: font,
+    Barlow_Condensed: font,
+    JetBrains_Mono: font
+  }
+})

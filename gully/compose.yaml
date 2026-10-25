@@ -1,0 +1,28 @@
+# Gully Bridge for Gully Chain Testnet. Runs on the gully-l3 box from /srv/gully-bridge.
+# Bound to the docker bridge address only; the box's Caddy proxies testnet-bridge.gullychain.xyz to it.
+name: gully-bridge
+
+services:
+  gully-bridge:
+    container_name: gully-bridge
+    image: gully-bridge:testnet
+    build:
+      context: ..
+      dockerfile: gully/Dockerfile
+      args:
+        # optional, from the shell env on the box; never commit a value
+        WALLETCONNECT_PROJECT_ID: ${WALLETCONNECT_PROJECT_ID:-}
+    restart: unless-stopped
+    mem_limit: 512m
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /app/packages/app/build/cache:uid=1000,gid=1000
+    ports:
+      - "172.17.0.1:8084:3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
