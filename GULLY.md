@@ -21,9 +21,15 @@ the EIP-1967 admin of the parent gateways (the rollup's `adminProxy`).
 Deploy on the gully-l3 box (only `/srv/gully-bridge` and the `gully-bridge` container):
 
 ```sh
-git archive --format=tar <branch> | ssh deploy@57.129.137.57 'find /srv/gully-bridge -mindepth 1 -maxdepth 1 ! -name .deploy-logs -exec rm -rf {} + && tar -x -C /srv/gully-bridge'
+git -c core.autocrlf=false archive --format=tar <branch> | ssh deploy@57.129.137.57 'find /srv/gully-bridge -mindepth 1 -maxdepth 1 ! -name .deploy-logs -exec rm -rf {} + && tar -x -C /srv/gully-bridge'
 ssh deploy@57.129.137.57 'cd /srv/gully-bridge && docker compose -f gully/compose.yaml up -d --build'
 ```
+
+`core.autocrlf=false` keeps LF endings in the tarball (with `true`, a Windows checkout ships CRLF files and the env
+file inlined the WalletConnect id as a bare carriage return). `.gitattributes` pins `gully/**`, env, shell and YAML
+files to LF as well, the Dockerfile strips carriage returns from `testnet.env`, and `packages/app/next.config.js` fails
+the build on a `NEXT_PUBLIC_*`/`GULLY_*` value holding one or on a malformed WalletConnect id. Check on the box with
+`grep -c $'\r' /srv/gully-bridge/gully/testnet.env` (must print 0).
 
 A WalletConnect id can be passed at build without committing it: `WALLETCONNECT_PROJECT_ID=<id> docker compose -f
 gully/compose.yaml up -d --build` (compose forwards it as a build arg). Without it the site offers browser wallets only.

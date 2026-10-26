@@ -133,6 +133,10 @@ export const getCctpUtils = ({ sourceChainId }: { sourceChainId?: number }) => {
   }
 
   const waitForAttestation = async (attestationHash: Address) => {
+    // Gully: never poll Circle with an empty or malformed hash (it answers 400 forever).
+    if (!/^0x[0-9a-fA-F]{64}$/.test(attestationHash ?? '')) {
+      throw new Error(`Invalid CCTP attestation hash: ${attestationHash}`)
+    }
     while (true) {
       const attestation = await fetchAttestation(attestationHash)
       if (attestation.status === 'complete') {

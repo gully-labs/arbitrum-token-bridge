@@ -18,7 +18,10 @@ RUN yarn install --frozen-lockfile --ignore-scripts --network-timeout 600000
 COPY . .
 ARG WALLETCONNECT_PROJECT_ID=""
 # Load the public build env, optionally add a WalletConnect id passed as a build arg, then build.
-RUN set -a && . ./gully/testnet.env && set +a \
+# Carriage returns are stripped first: a CRLF copy of testnet.env once inlined the WalletConnect id as "\r" (projectId=%0D).
+# packages/app/next.config.js fails the build if a NEXT_PUBLIC_/GULLY_ value still holds one, or the id is malformed.
+RUN tr -d '\r' < ./gully/testnet.env > /tmp/gully-build.env \
+ && set -a && . /tmp/gully-build.env && set +a \
  && if [ -n "$WALLETCONNECT_PROJECT_ID" ]; then export NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID="$WALLETCONNECT_PROJECT_ID"; fi \
  && export GULLY_STANDALONE=1 NODE_OPTIONS=--max-old-space-size=8192 \
  && yarn build

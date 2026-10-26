@@ -270,5 +270,11 @@ export default async function HomePage({ searchParams }: Props) {
     await sanitizeAndRedirect(searchParams)
   }
 
-  return <BridgeClient />
+  // One server-rendered h1 for crawlers and screen readers; the client app renders its own visual headings.
+  return (
+    <>
+      <h1 className="sr-only">{GULLY.name}: bridge to GullyChain Testnet</h1>
+      <BridgeClient />
+    </>
+  )
 }

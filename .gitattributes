@@ -1,0 +1,10 @@
+# Gully: deploy, env and shell files must reach the box with LF endings. `git archive` on a Windows checkout with
+# core.autocrlf=true wrote CRLF into gully/testnet.env, which inlined NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID as "\r".
+gully/** text eol=lf
+*.env text eol=lf
+.env* text eol=lf
+*.sh text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+Dockerfile text eol=lf
+*.dockerfile text eol=lf

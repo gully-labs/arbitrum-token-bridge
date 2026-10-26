@@ -1,5 +1,26 @@
 // @ts-check type next.config.js
 
+// Gully: fail the build on env values that would ship broken. A CRLF env file once inlined
+// NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID as a bare carriage return, so the live site sent projectId=%0D and every
+// WalletConnect request failed with 400. Empty is allowed (browser wallets only); anything else must be a real id.
+const gullyEnvProblems = Object.entries(process.env)
+  .filter(([key]) => key.startsWith('NEXT_PUBLIC_') || key.startsWith('GULLY_'))
+  .filter(([, value]) => typeof value === 'string' && /[\r\n]/.test(value))
+  .map(
+    ([key]) => `${key} contains a carriage return or newline (CRLF env file?)`
+  )
+const gullyWalletConnectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
+if (gullyWalletConnectId && !/^[0-9a-f]{32}$/i.test(gullyWalletConnectId)) {
+  gullyEnvProblems.push(
+    'NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID is set but is not a 32-character hex WalletConnect Cloud project id'
+  )
+}
+if (gullyEnvProblems.length > 0) {
+  throw new Error(
+    `Refusing to build with a broken env:\n- ${gullyEnvProblems.join('\n- ')}`
+  )
+}
+
 // Gully: optional default chain pair for a site that serves one chain, e.g.
 // GULLY_DEFAULT_QUERY="sourceChain=arbitrum-sepolia&destinationChain=gully-chain-testnet".
 // Read at build time; `/` without chain query params redirects (temporary) to `/?<query>`.
