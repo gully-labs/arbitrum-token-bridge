@@ -86,7 +86,14 @@ export async function generateMetadata({
       type: 'website',
       title: siteTitle,
       description: siteDescription,
-      images: [{ url: imageUrl, width: 1200, height: 630 }]
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: 'GullyChain logo with the GullyChain mascot'
+        }
+      ]
     },
     twitter: {
       card: 'summary_large_image',

@@ -6,15 +6,15 @@
 
 :root {
   --primary: transparent;
-  --secondary: #ffffff30;
-  --toastify-color-error: #c0392b;
-  --toastify-color-dark: #0a0f1a;
-  --toastify-text-color-dark: #ffffff;
-  --toastify-color-progress-dark: #01d9fa;
-  --toastify-color-progress-info: #01d9fa;
-  --toastify-color-progress-success: #01d9fa;
-  --toastify-color-progress-warning: #01d9fa;
-  --toastify-color-progress-error: #01d9fa;
+  --secondary: #f2f5f730;
+  --toastify-color-error: #ff8a80;
+  --toastify-color-dark: #0a1018;
+  --toastify-text-color-dark: #f2f5f7;
+  --toastify-color-progress-dark: #00b2fa;
+  --toastify-color-progress-info: #00b2fa;
+  --toastify-color-progress-success: #00b2fa;
+  --toastify-color-progress-warning: #00b2fa;
+  --toastify-color-progress-error: #00b2fa;
   --toastify-text-color-light: #1a1c1d;
   --toastify-text-color-info: #1a1c1d;
   --toastify-text-color-success: #1a1c1d;
@@ -27,29 +27,23 @@
     sans-serif
   );
   --toastify-toast-min-height: 44px;
-  --blue-link: #01d9fa;
+  --blue-link: #00b2fa;
 
-  /* GullyChain design tokens, verbatim from the brand kit v2 (CLAUDE_PROMPT.md section 2; also
-     public/brand/tokens.css). Colours are wired into Tailwind in the root tailwind.config.js, fonts in
-     components/common/Font.ts. */
-  --gc-black: #000000; /* Void Black: page ground */
-  --gc-night: #0a0f1a; /* cards, surfaces */
-  --gc-line: #16213a; /* 1px borders */
-  --gc-royal: #1567f9; /* Royal Blue: gradient start, secondary action */
-  --gc-electric: #0f89f7; /* Electric Blue: gradient mid */
-  --gc-cyan: #01d9fa; /* Cyan: primary accent, CTAs */
-  --gc-indigo: #2e36f7; /* Indigo: base of the icon gradient */
-  --gc-text: #ffffff;
-  --gc-muted: #9fb3cc;
-  --gc-up: #2e7d32;
-  --gc-down: #c0392b;
-  --gc-chain-gradient: linear-gradient(
-    90deg,
-    #1567f9 0%,
-    #0f89f7 35%,
-    #01d9fa 100%
-  );
-  --gc-icon-gradient: linear-gradient(180deg, #01d9f9 0%, #2e36f7 100%);
+  /* GullyChain design tokens (brand-kit/tokens.json, CLAUDE_PROMPT.md section 3; also public/brand/tokens.css).
+     Colours are wired into Tailwind in the root tailwind.config.js, the font in components/common/Font.ts. */
+  --gc-night: #05080d;
+  --gc-ink: #0a1018;
+  --gc-blue: #2563ff;
+  --gc-cyan: #00b2fa;
+  --gc-green: #46fb04;
+  --gc-white: #f2f5f7;
+  --gc-muted: #8a97a8;
+  --gc-chain-gradient: linear-gradient(90deg, #00b2fa, #46fb04);
+  --gc-font: var(--font-unica77), 'Exo 2', system-ui, sans-serif;
+  /* derived, not in tokens.json */
+  --gc-line: rgba(138, 151, 168, 0.18);
+  --gc-down: #ff8a80;
+  --gc-text: #f2f5f7;
   --gc-radius-card: 22px;
   --gc-radius-pill: 9999px;
 }
@@ -110,35 +104,29 @@ input:focus-visible {
 body {
   @apply min-h-screen;
   @apply bg-black;
-  font-weight: 400;
+  font-weight: 600;
 }
 
-/* GullyChain typography (kit section 3) */
+/* GullyChain typography: one face, Exo 2 (kit tokens.json: weights 600 and 800) */
 .font-gully-display {
-  /* Poppins 800: wordmark, headlines, big numbers */
-  font-family: var(--font-gully-display), 'Poppins', sans-serif;
+  /* Exo 2 800: headlines, big numbers */
+  font-family: var(--gc-font);
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1.05;
 }
 .font-gully-label {
-  /* Barlow Condensed 800, uppercase: badges, section labels */
-  font-family: var(--font-gully-label), 'Barlow Condensed', sans-serif;
-  font-weight: 800;
+  /* Exo 2 600, uppercase: badges, section labels */
+  font-family: var(--gc-font);
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 .font-gully-numbers {
-  /* IBM Plex Sans 500, tabular: addresses, hashes, prices, block numbers */
-  font-family: var(--font-gully-numbers), 'IBM Plex Sans', sans-serif;
-  font-weight: 500;
+  /* Exo 2 600, tabular: addresses, hashes, prices, block numbers */
+  font-family: var(--gc-font);
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
-}
-.font-gully-tagline {
-  /* Montserrat 500, 0.2em, Title Case: the tagline under the wordmark */
-  font-family: var(--font-gully-tagline), 'Montserrat', sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.2em;
 }
 /* The wordmark's "Chain": the kit gradient clipped to the text */
 .gc-wordmark-chain {
@@ -150,7 +138,7 @@ body {
 }
 /* Kit components */
 .gc-card {
-  background: var(--gc-night);
+  background: var(--gc-ink);
   border: 1px solid var(--gc-line);
   border-radius: var(--gc-radius-card);
   padding: 24px;
@@ -165,8 +153,8 @@ body {
 .gc-btn-secondary {
   border-radius: var(--gc-radius-pill);
   min-height: 44px;
-  background: var(--gc-royal);
-  color: #ffffff;
+  background: var(--gc-blue);
+  color: #f2f5f7;
   font-weight: 700;
 }
 .gc-badge {
@@ -175,8 +163,16 @@ body {
   padding: 0 12px;
   display: inline-flex;
   align-items: center;
-  background: var(--gc-royal);
-  color: #ffffff;
+  background: var(--gc-blue);
+  color: #f2f5f7;
+}
+/* Stat-tile sparklines (GullyStatsStrip): bars and the end dot ease to new values */
+@media (prefers-reduced-motion: no-preference) {
+  .gc-spark rect,
+  .gc-spark circle {
+    transition: x 0.5s ease, y 0.5s ease, width 0.5s ease, height 0.5s ease,
+      cx 0.5s ease, cy 0.5s ease;
+  }
 }
 /* Signature button: a cyan (or white, on cyan) shine sweeps across on hover. Needs `relative overflow-hidden`. */
 .gc-shine::after,
@@ -190,7 +186,7 @@ body {
   background: linear-gradient(
     110deg,
     transparent 20%,
-    rgba(1, 217, 250, 0.45) 50%,
+    rgba(0, 178, 250, 0.45) 50%,
     transparent 80%
   );
   transform: translateX(-200%);
@@ -239,7 +235,7 @@ button:focus-visible,
 input:focus-visible {
   box-sizing: border-box;
   outline-offset: -2px;
-  outline: 2px solid #01d9fa;
+  outline: 2px solid #00b2fa;
 }
 
 /*react error overlay hidden in dev mode while testing network switches which trow errors*/
@@ -253,7 +249,7 @@ body > iframe {
   padding-bottom: 4px;
 }
 .Toastify__toast {
-  border: 1px solid #16213a;
+  border: 1px solid rgba(138, 151, 168, 0.18);
   border-radius: 22px;
   padding: 14px 16px;
   box-shadow: none;
@@ -263,11 +259,11 @@ body > iframe {
   right: 20px;
 }
 .Toastify__close-button {
-  color: #9fb3cc;
+  color: #8a97a8;
   opacity: 1;
 }
 .Toastify__close-button:hover {
-  color: #ffffff;
+  color: #f2f5f7;
 }
 
 .web3modal-modal-lightbox {
@@ -290,8 +286,8 @@ body > iframe {
 
 .tippy-box[data-theme~='dark'] {
   border-radius: 12px;
-  border: 1px solid #16213a;
-  background: #0a0f1a;
+  border: 1px solid rgba(138, 151, 168, 0.18);
+  background: #0a1018;
 }
 
 /*

@@ -12,7 +12,7 @@ import {
 import type { TooltipProps } from 'recharts'
 import { twMerge } from 'tailwind-merge'
 
-import { GULLY, GC_MASCOT_RAPID_SRC } from '../brand'
+import { GULLY, GC_MASCOT_SIZE, GC_MASCOT_SRC } from '../brand'
 import {
   BridgeDeposit,
   BridgeTransfer,
@@ -26,13 +26,12 @@ import {
   totalWei,
   weiToEthNumber
 } from './bridgeActivity'
-import { useGullyBridgeActivity } from './useGullyBridgeActivity'
-import { useGullyChainTicker } from './useGullyChainTicker'
+import { useGullyActivity } from './GullyActivityContext'
 
 // Kit tokens (tailwind.css :root). Recharts takes literal colours, so they are repeated here.
-const CYAN = '#01D9FA'
-const LINE = '#16213A'
-const MUTED = '#9FB3CC'
+const CYAN = '#00B2FA'
+const LINE = 'rgba(138, 151, 168, 0.18)'
+const MUTED = '#8A97A8'
 
 const DAYS = 14
 const RECENT_SIZES = 10
@@ -81,7 +80,7 @@ function PanelTooltip<T>({
   if (!active || datum === undefined) return null
   const row = render(datum)
   return (
-    <div className="rounded-[12px] border border-gc-line bg-gc-night px-3 py-2 text-left shadow-none">
+    <div className="rounded-[12px] border border-gc-line bg-gc-ink px-3 py-2 text-left shadow-none">
       <p className="font-gully-numbers text-[13px] font-semibold text-white">
         {row.value}
       </p>
@@ -131,7 +130,7 @@ function TransferRow({
         aria-hidden
         className={twMerge(
           'font-gully-numbers flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-pill text-[12px] font-semibold',
-          isDeposit ? 'bg-gc-cyan text-black' : 'bg-gc-royal text-white'
+          isDeposit ? 'bg-gc-cyan text-black' : 'bg-gc-blue text-white'
         )}
       >
         {isDeposit ? '↓' : '↑'}
@@ -162,8 +161,7 @@ function TransferRow({
 
 export function GullyActivityPanel({ className }: { className?: string }) {
   const reducedMotion = usePrefersReducedMotion()
-  const tick = useGullyChainTicker()
-  const activity = useGullyBridgeActivity()
+  const { activity, tick } = useGullyActivity()
   const now = useNow(10_000)
 
   const perDay = useMemo<DayBucket[]>(
@@ -217,16 +215,16 @@ export function GullyActivityPanel({ className }: { className?: string }) {
         GullyChain bridge activity
       </h2>
 
-      {/* Kit mascot pose 05 "Rapid Transaction": speed and settlement messaging, on black, faded in */}
+      {/* Kit mascot (trader) for the settlement message, on the page ground, faded in */}
       <div className="relative h-[84px] overflow-hidden rounded-[14px] border border-gc-line bg-black">
         <Image
-          src={GC_MASCOT_RAPID_SRC}
+          src={GC_MASCOT_SRC}
           alt=""
           aria-hidden
-          width={1024}
-          height={1024}
+          width={GC_MASCOT_SIZE.width}
+          height={GC_MASCOT_SIZE.height}
           unoptimized
-          className="absolute -right-3 top-1/2 h-[140px] w-[140px] -translate-y-1/2 object-cover"
+          className="absolute -right-1 top-0 h-[84px] w-auto"
         />
         <div className="absolute inset-0 bg-gcMascotFade" aria-hidden />
         <div className="relative flex h-full flex-col justify-center px-4">

@@ -16,7 +16,7 @@ function getClassNameForVariant(variant: ButtonVariant) {
       return 'gc-shine-light border-gc-cyan bg-gc-cyan text-black'
 
     case 'secondary':
-      return 'gc-shine border-gc-royal bg-gc-royal text-white'
+      return 'gc-shine border-gc-blue bg-gc-blue text-white'
 
     case 'tertiary':
       return 'gc-shine border-transparent bg-transparent text-white hover:bg-white/5'

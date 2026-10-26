@@ -38,7 +38,7 @@ function ToastIcon({ type }: IconProps) {
   const props = { size: 20, strokeWidth: 1.75, 'aria-hidden': true }
   switch (type) {
     case 'success':
-      return <CheckCircle2 {...props} className="text-gc-cyan" />
+      return <CheckCircle2 {...props} className="text-gc-green" />
     case 'warning':
       return <AlertTriangle {...props} className="text-pending" />
     case 'error':

@@ -6,7 +6,7 @@ import { ThemeConfig } from '../util/queryParamUtils'
 export const defaultTheme: ThemeConfig = {
   borderRadius: '22px', // GullyChain kit: 22px cards; 44px-high controls become pills
   borderWidth: '1px',
-  widgetBackgroundColor: '#0A0F1A', // GullyChain kit: night (cards, surfaces)
+  widgetBackgroundColor: '#0A1018', // GullyChain kit: ink (cards, surfaces)
   fontFamily: `${unica.style.fontFamily}, Roboto, sans-serif`
 }
 

@@ -54,7 +54,7 @@ export function HeaderAccountPopover({
   }
 
   const headerItemsClassName =
-    'arb-hover group flex w-full flex-row items-center space-x-2 px-12 py-2 text-sm sm:text-sm text-gray-4 sm:text-white hover:bg-gc-night sm:rounded-pill sm:px-4 sm:py-1'
+    'arb-hover group flex w-full flex-row items-center space-x-2 px-12 py-2 text-sm sm:text-sm text-gray-4 sm:text-white hover:bg-gc-ink sm:rounded-pill sm:px-4 sm:py-1'
   // Gully: 20px Lucide icons, muted by default, cyan on the active (hovered/focused) item
   const headerIconClassName =
     'text-gc-muted group-hover:text-gc-cyan group-focus-visible:text-gc-cyan'

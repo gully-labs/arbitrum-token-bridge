@@ -38,7 +38,7 @@ export function Header({ children }: { children?: React.ReactNode }) {
       className={twMerge(
         'sticky top-0 z-10 flex h-12 w-full justify-center bg-black/70 px-4 backdrop-blur sm:relative sm:h-16 sm:px-6 sm:backdrop-blur-none [body.menu-open_&]:fixed',
         isTestnet || isExperimentalMode
-          ? 'sm:border-b sm:border-gc-line sm:bg-gc-night/70'
+          ? 'sm:border-b sm:border-gc-line sm:bg-gc-ink/70'
           : 'sm:bg-transparent',
         destinationChainStyle.borderColor ? 'sm:border-b' : ''
       )}
@@ -50,13 +50,13 @@ export function Header({ children }: { children?: React.ReactNode }) {
       }}
     >
       <div className="flex w-full items-center justify-end gap-2 text-white">
-        {/* GullyChain kit icon (transparent, on black only; min 16px) replaces the Arbitrum mark on mobile */}
+        {/* GullyChain kit icon (transparent, dark backgrounds only) replaces the Arbitrum mark on mobile */}
         <Image
           className="mr-auto h-8 w-8 sm:hidden"
           src={GC_ICON_SRC}
           alt={GULLY.name}
-          width={192}
-          height={192}
+          width={512}
+          height={512}
           unoptimized
         />
         {isTestnet && !isExperimentalMode && (

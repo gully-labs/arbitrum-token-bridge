@@ -13,14 +13,14 @@ import {
   Zap
 } from 'lucide-react'
 
-import { GULLY, GC_ICON_SRC } from './brand'
+import { GULLY, GC_BADGE_POWERED, GC_LOGO_SIZE, GC_LOGO_SRC } from './brand'
 import { GullyActivityPanel } from './activity/GullyActivityPanel'
 
 /**
  * Replaces the Arbitrum-branded sidebar from @offchainlabs/cobalt (its logo, links and footer are hardcoded
  * inside the package and cannot be themed). Wrapped by AppSidebar.tsx and AppMobileSidebar.tsx.
- * Brand: GullyChain kit v2. The wordmark is live text (Poppins 800, -0.02em, "Chain" in the kit gradient)
- * next to the kit icon, with the kit tagline underneath (Montserrat 500, 0.2em, Title Case).
+ * Brand: GullyChain kit. The header logo is the kit's transparent 3D logo at 40px (width auto, explicit
+ * width/height attributes so nothing shifts); the footer carries the kit's "Powered by GullyChain" badge.
  * Every nav and footer item carries a 20px Lucide icon (stroke 1.75): muted by default, cyan when active.
  */
 
@@ -36,40 +36,22 @@ const NAV_LINKS = [
   { title: 'GitHub', href: GULLY.links.github, Icon: Github }
 ]
 
-export function GullyWordmark({
-  className,
-  tagline = true
-}: {
-  className?: string
-  tagline?: boolean
-}) {
+export function GullyWordmark({ className }: { className?: string }) {
   return (
     <a
       href={GULLY.links.website}
       aria-label="GullyChain"
-      className={twMerge('flex items-center gap-3', className)}
+      className={twMerge('inline-flex items-center', className)}
     >
-      {/* Kit icon: transparent, never recoloured, only on black (min 16px). Clearspace = icon radius. */}
       <Image
-        src={GC_ICON_SRC}
-        alt=""
-        aria-hidden
-        width={192}
-        height={192}
+        src={GC_LOGO_SRC}
+        alt="GullyChain"
+        width={GC_LOGO_SIZE.width}
+        height={GC_LOGO_SIZE.height}
         unoptimized
-        className="h-10 w-10 shrink-0"
+        priority
+        className="h-10 w-auto"
       />
-      <span className="flex flex-col">
-        <span className="font-gully-display text-[26px] leading-none text-white">
-          Gully
-          <span className="gc-wordmark-chain">Chain</span>
-        </span>
-        {tagline && (
-          <span className="font-gully-tagline mt-[6px] whitespace-nowrap text-[8px] leading-none text-white">
-            {GULLY.tagline}
-          </span>
-        )}
-      </span>
     </a>
   )
 }
@@ -79,7 +61,7 @@ function SidebarMenu({ children }: { children?: React.ReactNode }) {
     <nav aria-label="GullyChain" className="flex w-full flex-col gap-2 px-4">
       <div
         aria-current="page"
-        className="flex items-center gap-3 rounded-[14px] border border-gc-line bg-gc-night px-4 py-3 text-white"
+        className="flex items-center gap-3 rounded-[14px] border border-gc-line bg-gc-ink px-4 py-3 text-white"
       >
         <ArrowLeftRight {...ICON} className="shrink-0 text-gc-cyan" />
         <span className="font-semibold">{GULLY.name}</span>
@@ -95,7 +77,7 @@ function SidebarMenu({ children }: { children?: React.ReactNode }) {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-3 rounded-pill px-4 py-2 text-sm text-white/80 transition-colors hover:bg-gc-night hover:text-white"
+          className="group flex items-center gap-3 rounded-pill px-4 py-2 text-sm text-white/80 transition-colors hover:bg-gc-ink hover:text-white"
         >
           <Icon {...ICON} className={navIconClassName} />
           <span>{title}</span>
@@ -142,6 +124,23 @@ function SidebarFooter() {
         Arbitrum token bridge by Offchain Labs, Apache-2.0. Arbitrum is a
         trademark of its owners.
       </p>
+      {/* Kit badge (section 5): vector SVG with PNG fallbacks, scaled proportionally to 142x42 */}
+      <a
+        href={GULLY.links.website}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-1 inline-block"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={GC_BADGE_POWERED.svg}
+          srcSet={GC_BADGE_POWERED.srcSet}
+          width={GC_BADGE_POWERED.width}
+          height={GC_BADGE_POWERED.height}
+          alt="Powered by GullyChain"
+          className="h-[42px] w-[142px]"
+        />
+      </a>
     </div>
   )
 }
@@ -189,9 +188,9 @@ export function GullyMobileSidebar({
       {open && (
         <div className="fixed left-0 top-0 z-[10000] flex h-screen w-full flex-col overflow-y-auto bg-black">
           <div className="flex w-full items-center justify-between p-4">
-            <GullyWordmark tagline={false} />
+            <GullyWordmark />
             <button
-              className="flex h-[60px] w-[60px] items-center justify-center rounded-pill hover:bg-gc-night"
+              className="flex h-[60px] w-[60px] items-center justify-center rounded-pill hover:bg-gc-ink"
               aria-label="Close menu"
               onClick={close}
             >

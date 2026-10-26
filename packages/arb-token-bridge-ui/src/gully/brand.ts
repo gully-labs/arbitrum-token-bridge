@@ -2,18 +2,17 @@
  * GullyChain Bridge brand constants. Everything the Gully fork says about itself lives here, so upstream
  * merges only ever touch the few call sites that import from this file.
  * Colours and fonts live in the theming layer (tailwind.config.js, styles/tailwind.css, Font.ts); the
- * values come from the GullyChain brand kit v2 (GRAPHICS/gullychain-brand-kit-v2/CLAUDE_PROMPT.md).
+ * values come from the GullyChain brand kit (GULLY LABS GRAPHICS/Gully Chain/brand-kit, CLAUDE_PROMPT.md + tokens.json).
  * The brand name is always written "GullyChain" (one word, capital G, capital C).
  */
 export const GULLY = {
   name: 'GullyChain Bridge',
   shortName: 'GullyChain Bridge',
-  /** Kit slogan, verbatim, Title Case. */
-  tagline: 'Your Profile Is Your Wallet',
   description:
     'Bridge assets between Arbitrum Sepolia and GullyChain Testnet. Built by Gully Labs on the Arbitrum token bridge.',
-  siteUrl: 'https://testnet-bridge.gullychain.xyz',
-  themeColor: '#000000',
+  // Production origin for absolute OG/Twitter URLs (kit section 2), per the owner.
+  siteUrl: 'https://bridge.gullychain.xyz',
+  themeColor: '#05080D',
   links: {
     website: 'https://gullychain.xyz',
     explorer: 'https://testnet-explorer.gullychain.xyz',
@@ -38,7 +37,18 @@ export const GULLY = {
 } as const
 
 /** Kit files, byte for byte (see packages/app/scripts/brand-from-kit.mjs). */
-export const GC_ICON_SRC = '/brand/gc-icon-192.png'
-export const GC_ICON_512_SRC = '/brand/gc-icon-512.png'
-/** Mascot pose 05 "Rapid Transaction": the kit's pose for speed and settlement messaging. */
-export const GC_MASCOT_RAPID_SRC = '/brand/gc-mascot-05-rapid-transaction.png'
+export const GC_ICON_SRC = '/brand/gullychain-icon-transparent-512.png'
+/** The 3D logo with background removed, 1315x305: header/nav on dark, shown at height <= 152px, width auto. */
+export const GC_LOGO_SRC = '/brand/logo/gullychain-logo-transparent.png'
+export const GC_LOGO_SIZE = { width: 1315, height: 305 } as const
+/** "Powered by GullyChain" badge, native 189x56 (vector SVG, PNG fallbacks at 1x/2x/3x). */
+export const GC_BADGE_POWERED = {
+  svg: '/brand/badges/gullychain-powered-by-dark.svg',
+  srcSet:
+    '/brand/badges/gullychain-powered-by-dark.png 1x, /brand/badges/gullychain-powered-by-dark-2x.png 2x, /brand/badges/gullychain-powered-by-dark-3x.png 3x',
+  width: 189,
+  height: 56
+} as const
+/** Mascot "trader" (335x400) for the activity panel's settlement message. */
+export const GC_MASCOT_SRC = '/brand/mascots/gullychain-mascot-trader.png'
+export const GC_MASCOT_SIZE = { width: 335, height: 400 } as const

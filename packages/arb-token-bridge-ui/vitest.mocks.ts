@@ -8,8 +8,7 @@ vi.mock('next/font/local', () => ({
   }))
 }))
 
-// Gully: the brand fonts come from next/font/google (GullyChain kit: Hanken Grotesk, Poppins,
-// Barlow Condensed, IBM Plex Sans, Montserrat).
+// Gully: the brand font comes from next/font/google (GullyChain kit: Exo 2).
 vi.mock('next/font/google', () => {
   const font = vi.fn(() => ({
     className: '',
@@ -19,10 +18,6 @@ vi.mock('next/font/google', () => {
     }
   }))
   return {
-    Hanken_Grotesk: font,
-    Poppins: font,
-    Barlow_Condensed: font,
-    IBM_Plex_Sans: font,
-    Montserrat: font
+    Exo_2: font
   }
 })

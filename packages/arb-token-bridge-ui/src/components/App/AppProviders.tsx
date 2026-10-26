@@ -15,17 +15,17 @@ import { INTEGRATOR_ID } from '@/bridge/app/api/crosschain-transfers/lifi'
 
 const rainbowkitTheme = merge(darkTheme(), {
   colors: {
-    // GullyChain kit: cyan primary action with black text, night surfaces, 1px line borders, muted text
-    accentColor: '#01D9FA',
-    accentColorForeground: '#000000',
-    modalBackground: '#0A0F1A',
-    modalBorder: '#16213A',
-    generalBorder: '#16213A',
-    modalText: '#FFFFFF',
-    modalTextSecondary: '#9FB3CC',
-    menuItemBackground: '#111A2E',
-    connectButtonBackground: '#0A0F1A',
-    connectButtonText: '#FFFFFF'
+    // GullyChain kit: cyan primary action on night text, ink surfaces, hairline borders, muted text
+    accentColor: '#00B2FA',
+    accentColorForeground: '#05080D',
+    modalBackground: '#0A1018',
+    modalBorder: 'rgba(138, 151, 168, 0.18)',
+    generalBorder: 'rgba(138, 151, 168, 0.18)',
+    modalText: '#F2F5F7',
+    modalTextSecondary: '#8A97A8',
+    menuItemBackground: '#111A26',
+    connectButtonBackground: '#0A1018',
+    connectButtonText: '#F2F5F7'
   },
   radii: {
     // pills for buttons, 22px for cards/modals

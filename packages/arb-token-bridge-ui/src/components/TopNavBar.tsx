@@ -26,7 +26,7 @@ export function TopNavBar() {
   return (
     <Tab.List
       className={twMerge(
-        'grid w-full max-w-[600px] grid-cols-2 border-y border-gc-line bg-gc-night p-[6px] text-white md:rounded-pill md:border'
+        'grid w-full max-w-[600px] grid-cols-2 border-y border-gc-line bg-gc-ink p-[6px] text-white md:rounded-pill md:border'
       )}
     >
       <StyledTab aria-label="Switch to Bridge Tab">
