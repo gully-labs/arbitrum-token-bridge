@@ -1528,7 +1528,7 @@
       },
       "explorerUrl": "https://testnet-explorer.gullychain.xyz",
       "rpcUrl": "https://testnet-rpc.gullychain.xyz",
-      "name": "Gully Chain Testnet",
+      "name": "GullyChain Testnet",
       "slug": "gully-chain-testnet",
       "parentChainId": 421614,
       "isCustom": true,
@@ -1552,9 +1552,9 @@
       "bridgeUiConfig": {
         "color": "#00B2FA",
         "network": {
-          "name": "Gully Chain Testnet",
+          "name": "GullyChain Testnet",
           "logo": "/images/GullyChainLogo.png",
-          "description": "The testnet of Gully Chain, the Gully Labs L3 on Arbitrum Sepolia."
+          "description": "The testnet of GullyChain, the Gully Labs L3 on Arbitrum Sepolia."
         }
       }
     },
