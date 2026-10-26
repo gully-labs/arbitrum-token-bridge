@@ -158,13 +158,14 @@ body {
   font-weight: 700;
 }
 .gc-badge {
+  /* cyan on night (AA at 11px); the kit's blue with white text falls short of 4.5:1 at badge sizes */
   border-radius: var(--gc-radius-pill);
   height: 28px;
   padding: 0 12px;
   display: inline-flex;
   align-items: center;
-  background: var(--gc-blue);
-  color: #f2f5f7;
+  background: var(--gc-cyan);
+  color: var(--gc-night);
 }
 /* Stat-tile sparklines (GullyStatsStrip): bars and the end dot ease to new values */
 @media (prefers-reduced-motion: no-preference) {

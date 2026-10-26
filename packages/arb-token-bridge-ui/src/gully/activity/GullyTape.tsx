@@ -39,7 +39,8 @@ export function GullyTape({ className }: { className?: string }) {
     <div
       aria-label="Latest bridge transfers"
       className={twMerge(
-        'relative flex h-[38px] items-center overflow-hidden border border-gc-line bg-gc-ink',
+        // w-0 + min-w-full: the nowrap track must never contribute its intrinsic width to the page
+        'relative flex h-[38px] w-0 min-w-full items-center overflow-hidden border border-gc-line bg-gc-ink',
         className
       )}
     >
