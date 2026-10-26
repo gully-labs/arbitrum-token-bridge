@@ -330,25 +330,27 @@ export function GullyActivityPanel({ className }: { className?: string }) {
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <table className="sr-only">
-          <caption>Deposits per day, last {DAYS} days (UTC)</caption>
-          <thead>
-            <tr>
-              <th scope="col">Day</th>
-              <th scope="col">Deposits</th>
-              <th scope="col">ETH</th>
-            </tr>
-          </thead>
-          <tbody>
-            {perDay.map(d => (
-              <tr key={d.day}>
-                <td>{d.day}</td>
-                <td>{d.count}</td>
-                <td>{formatEth(d.valueWei)}</td>
+        <div className="sr-only">
+          <table>
+            <caption>Deposits per day, last {DAYS} days (UTC)</caption>
+            <thead>
+              <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Deposits</th>
+                <th scope="col">ETH</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {perDay.map(d => (
+                <tr key={d.day}>
+                  <td>{d.day}</td>
+                  <td>{d.count}</td>
+                  <td>{formatEth(d.valueWei)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </figure>
 
       {/* Recent deposit sizes */}
@@ -422,35 +424,37 @@ export function GullyActivityPanel({ className }: { className?: string }) {
             </div>
           )}
         </div>
-        <table className="sr-only">
-          <caption>Recent deposits into GullyChain Testnet</caption>
-          <thead>
-            <tr>
-              <th scope="col">Message</th>
-              <th scope="col">Kind</th>
-              <th scope="col">ETH</th>
-              <th scope="col">Transaction</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recentSizes.map(d => (
-              <tr key={d.key}>
-                <td>{d.label}</td>
-                <td>{DEPOSIT_KIND_LABEL[d.deposit.kind]}</td>
-                <td>{formatEth(d.deposit.valueWei, 6)}</td>
-                <td>
-                  <a
-                    href={`${GULLY.activity.parentExplorerUrl}/tx/${d.deposit.txHash}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {shortHex(d.deposit.txHash)}
-                  </a>
-                </td>
+        <div className="sr-only">
+          <table>
+            <caption>Recent deposits into GullyChain Testnet</caption>
+            <thead>
+              <tr>
+                <th scope="col">Message</th>
+                <th scope="col">Kind</th>
+                <th scope="col">ETH</th>
+                <th scope="col">Transaction</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {recentSizes.map(d => (
+                <tr key={d.key}>
+                  <td>{d.label}</td>
+                  <td>{DEPOSIT_KIND_LABEL[d.deposit.kind]}</td>
+                  <td>{formatEth(d.deposit.valueWei, 6)}</td>
+                  <td>
+                    <a
+                      href={`${GULLY.activity.parentExplorerUrl}/tx/${d.deposit.txHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {shortHex(d.deposit.txHash)}
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </figure>
 
       {/* Last transfers, both directions, live */}
