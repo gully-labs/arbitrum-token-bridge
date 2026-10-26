@@ -13,6 +13,7 @@ import { useMode } from '../../hooks/useMode'
 import { RecoverFunds } from '../RecoverFunds'
 import { GullyActivityPanel } from '../../gully/activity/GullyActivityPanel'
 import { GullyStepper } from '../../gully/GullyStepper'
+import { useGullyA11y } from '../../gully/useGullyA11y'
 
 export function MainContent() {
   const [isArbitrumStatsVisible] =
@@ -27,6 +28,7 @@ export function MainContent() {
   )
 
   useBalanceUpdater()
+  useGullyA11y()
 
   const { embedMode } = useMode()
 

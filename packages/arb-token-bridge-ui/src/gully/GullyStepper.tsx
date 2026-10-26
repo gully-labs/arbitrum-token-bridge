@@ -44,7 +44,7 @@ export function GullyStepper({ className }: { className?: string }) {
             <li
               key={label}
               className={twMerge(
-                'flex items-center gap-1',
+                'flex min-w-0 items-center gap-1',
                 index < STEPS.length - 1 && 'flex-1'
               )}
               aria-current={active ? 'step' : undefined}
@@ -64,15 +64,17 @@ export function GullyStepper({ className }: { className?: string }) {
                     <Icon size={16} strokeWidth={1.75} aria-hidden />
                   )}
                 </span>
+                <span className="sr-only">
+                  {done ? 'Done: ' : active ? 'Current step: ' : ''}
+                  {label}
+                </span>
                 <span
+                  aria-hidden
                   className={twMerge(
                     'font-gully-label text-[11px]',
-                    active ? 'text-white' : 'text-gc-muted'
+                    active ? 'text-white' : 'hidden text-gc-muted sm:inline'
                   )}
                 >
-                  <span className="sr-only">
-                    {done ? 'Done: ' : active ? 'Current step: ' : ''}
-                  </span>
                   {label}
                 </span>
               </span>
@@ -80,7 +82,7 @@ export function GullyStepper({ className }: { className?: string }) {
                 <span
                   aria-hidden
                   className={twMerge(
-                    'mx-2 h-px flex-1',
+                    'mx-1 h-px min-w-[6px] flex-1 sm:mx-2',
                     done ? 'bg-gc-cyan' : 'bg-gc-line'
                   )}
                 />
