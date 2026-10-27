@@ -11,6 +11,7 @@ import { ArbTokenBridge } from '../hooks/arbTokenBridge.types'
 import { ChainId } from '../types/ChainId'
 import orbitChainsData from './orbitChainsData.json'
 import { isLifiEnabled } from './featureFlag'
+import { GC_ICON_SRC, GULLY_TOKEN_LISTS } from '../gully/brand'
 
 export const SPECIAL_ARBITRUM_TOKEN_TOKEN_LIST_ID =
   'SPECIAL_ARBITRUM_TOKEN_TOKEN_LIST_ID'
@@ -158,6 +159,20 @@ export const BRIDGE_TOKEN_LISTS: BridgeTokenList[] = [
   ...orbitChainsData.mainnet
     .concat(orbitChainsData.testnet)
     .reduce((acc, chain) => {
+      // Gully: our chains get the Gully token list, never Arbitrum's list service (403 for unknown chains).
+      const gullyTokenList = GULLY_TOKEN_LISTS[chain.chainId]
+      if (gullyTokenList) {
+        acc.push({
+          id: `${chain.chainId}_gully`,
+          originChainID: chain.chainId,
+          url: gullyTokenList.url,
+          name: gullyTokenList.name,
+          isDefault: true,
+          logoURI: GC_ICON_SRC
+        })
+        return acc
+      }
+
       // Only include arbified native token list for L3 settling to ArbOne
       if (chain.parentChainId === ChainId.ArbitrumOne) {
         acc.push({
@@ -223,11 +238,9 @@ export async function fetchTokenListFromURL(tokenListURL: string): Promise<{
   data: TokenList | undefined
 }> {
   try {
-    const { data } = await axios.get(tokenListURL, {
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    })
+    // Gully: a plain GET with no custom headers. Upstream sent `Access-Control-Allow-Origin` (a response header) as a
+    // request header, which forces a CORS preflight that static hosts such as gullychain.xyz answer with 405.
+    const { data } = await axios.get(tokenListURL)
 
     const isValid = validateTokenList(data)
 

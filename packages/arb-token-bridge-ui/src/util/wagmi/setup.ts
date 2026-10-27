@@ -88,7 +88,13 @@ function getChainList(): readonly [Chain, ...Chain[]] {
 
 const chainList = getChainList()
 
-const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!
+// Gully: a WalletConnect Cloud project id is 32 hex characters. Anything else (a stray carriage return from a CRLF
+// env file, spaces, a placeholder) used to ship as-is and made every WalletConnect request fail with 400, so treat it
+// as missing. packages/app/next.config.js also fails the build on such a value.
+const rawProjectId = (
+  process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID ?? ''
+).trim()
+const projectId = /^[0-9a-f]{32}$/i.test(rawProjectId) ? rawProjectId : ''
 
 if (!projectId) {
   console.error(

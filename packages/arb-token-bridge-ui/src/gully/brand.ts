@@ -38,6 +38,20 @@ export const GULLY = {
 
 /** Kit files, byte for byte (see packages/app/scripts/brand-from-kit.mjs). */
 export const GC_ICON_SRC = '/brand/gullychain-icon-transparent-512.png'
+
+/** Token lists for Gully chains, by chain id. Arbitrum's list service has no list for our chains (its
+ *  `<chainId>_arbed_uniswap_labs.json` URL returns 403), so these replace it. Uniswap token-lists format, built by
+ *  gully-ops l3/tokenlist and served with `Access-Control-Allow-Origin: *`. */
+export const GULLY_TOKEN_LISTS: Record<number, { url: string; name: string }> =
+  {
+    485590: {
+      url: 'https://gullychain.xyz/tokenlist.json',
+      name: 'GullyChain Testnet Token List'
+    }
+  }
+
+/** Chains that never use Circle's CCTP (no native USDC there): skip every Circle API call for them. */
+export const GULLY_CHAIN_IDS: readonly number[] = [485590]
 /** The 3D logo with background removed, 1315x305: header/nav on dark, shown at height <= 152px, width auto. */
 export const GC_LOGO_SRC = '/brand/logo/gullychain-logo-transparent.png'
 export const GC_LOGO_SIZE = { width: 1315, height: 305 } as const
