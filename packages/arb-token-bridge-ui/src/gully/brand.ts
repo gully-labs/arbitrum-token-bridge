@@ -41,6 +41,15 @@ export const GC_ICON_SRC = '/brand/gullychain-icon-transparent-512.png'
 /** The 3D logo with background removed, 1315x305: header/nav on dark, shown at height <= 152px, width auto. */
 export const GC_LOGO_SRC = '/brand/logo/gullychain-logo-transparent.png'
 export const GC_LOGO_SIZE = { width: 1315, height: 305 } as const
+/** "Powered by Gully Labs" badge from the Gully Labs kit (brand-kit/badges, byte-exact PNGs; the kit SVG has empty
+ *  image slots), native 254x64, shown at 127x32 in the footer of every Gully surface (owner rule 2026-10-26). */
+export const GL_BADGE_POWERED = {
+  src: '/brand/gully-labs/powered-by-gully-labs-dark.png',
+  srcSet:
+    '/brand/gully-labs/powered-by-gully-labs-dark.png 1x, /brand/gully-labs/powered-by-gully-labs-dark-2x.png 2x, /brand/gully-labs/powered-by-gully-labs-dark-3x.png 3x',
+  width: 127,
+  height: 32
+} as const
 /** "Powered by GullyChain" badge, native 189x56 (vector SVG, PNG fallbacks at 1x/2x/3x). */
 export const GC_BADGE_POWERED = {
   svg: '/brand/badges/gullychain-powered-by-dark.svg',

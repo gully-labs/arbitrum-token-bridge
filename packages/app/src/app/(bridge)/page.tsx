@@ -64,8 +64,9 @@ export async function generateMetadata({
     destinationChainInfo.id
   )
 
-  const siteTitle = `Bridge to ${destinationChainInfo.name} | ${GULLY.name}`
-  const siteDescription = `Bridge from ${sourceChainInfo.name} to ${destinationChainInfo.name} using ${GULLY.name}. ${GULLY.description}`
+  // SEO (owner rule 2026-10-26): "Page · Product" titles, 140-160 character descriptions, @Gully_Labs as twitter:site.
+  const siteTitle = `Bridge to ${destinationChainInfo.name} · ${GULLY.name}`
+  const siteDescription = `Bridge ETH and tokens from ${sourceChainInfo.name} to ${destinationChainInfo.name} with the GullyChain Bridge, the canonical Arbitrum bridge by Gully Labs.`
   const siteDomain = GULLY.siteUrl
 
   // Gully: one share image, made from the brand kit (upstream generates per-chain Arbitrum-branded ones).
@@ -81,9 +82,11 @@ export async function generateMetadata({
   return {
     title: siteTitle,
     description: siteDescription,
+    alternates: { canonical: siteDomain },
     openGraph: {
       url: siteDomain,
       type: 'website',
+      siteName: GULLY.name,
       title: siteTitle,
       description: siteDescription,
       images: [
@@ -97,7 +100,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      site: siteDomain,
+      site: GULLY.links.xHandle,
       title: siteTitle,
       description: siteDescription,
       images: [imageUrl]

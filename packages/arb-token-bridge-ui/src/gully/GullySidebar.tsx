@@ -13,7 +13,7 @@ import {
   Zap
 } from 'lucide-react'
 
-import { GULLY, GC_BADGE_POWERED, GC_LOGO_SIZE, GC_LOGO_SRC } from './brand'
+import { GULLY, GC_BADGE_POWERED, GL_BADGE_POWERED, GC_LOGO_SIZE, GC_LOGO_SRC } from './brand'
 import { GullyActivityPanel } from './activity/GullyActivityPanel'
 
 /**
@@ -139,6 +139,24 @@ function SidebarFooter() {
           height={GC_BADGE_POWERED.height}
           alt="Powered by GullyChain"
           className="h-[42px] w-[142px]"
+        />
+      </a>
+      <a
+        href={GULLY.links.labs}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Powered by Gully Labs (opens in a new tab)"
+        className="mt-1 inline-block"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={GL_BADGE_POWERED.src}
+          srcSet={GL_BADGE_POWERED.srcSet}
+          width={GL_BADGE_POWERED.width}
+          height={GL_BADGE_POWERED.height}
+          alt="Powered by Gully Labs"
+          loading="lazy"
+          className="h-[32px] w-[127px]"
         />
       </a>
     </div>
