@@ -3,12 +3,12 @@ import { vi } from 'vitest'
 vi.mock('next/font/local', () => ({
   default: vi.fn(() => ({
     style: {
-      fontFamily: 'Roboto, sans-serif'
+      fontFamily: 'mocked'
     }
   }))
 }))
 
-// Gully: the brand fonts come from next/font/google (Barlow, Barlow Condensed, JetBrains Mono).
+// Gully: the brand font comes from next/font/google (GullyChain kit: Exo 2).
 vi.mock('next/font/google', () => {
   const font = vi.fn(() => ({
     className: '',
@@ -18,8 +18,6 @@ vi.mock('next/font/google', () => {
     }
   }))
   return {
-    Barlow: font,
-    Barlow_Condensed: font,
-    JetBrains_Mono: font
+    Exo_2: font
   }
 })

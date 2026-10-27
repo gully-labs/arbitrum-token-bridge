@@ -76,7 +76,7 @@ export async function generateMetadata({
   // const imageUrl = `${siteDomain}/images/__auto-generated/open-graph/${metaImagePath}`
   void isSourceOrbitChain
   void isDestinationOrbitChain
-  const imageUrl = `${siteDomain}/og-image.jpg`
+  const imageUrl = `${siteDomain}/og-image.png`
 
   return {
     title: siteTitle,
@@ -86,7 +86,14 @@ export async function generateMetadata({
       type: 'website',
       title: siteTitle,
       description: siteDescription,
-      images: [imageUrl]
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: 'GullyChain logo with the GullyChain mascot'
+        }
+      ]
     },
     twitter: {
       card: 'summary_large_image',

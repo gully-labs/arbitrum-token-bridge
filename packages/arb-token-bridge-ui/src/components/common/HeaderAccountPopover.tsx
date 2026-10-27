@@ -1,11 +1,13 @@
 import { Popover } from '@headlessui/react'
 import {
-  ArrowLeftOnRectangleIcon,
-  ArrowTopRightOnSquareIcon,
   ChevronDownIcon,
-  Cog6ToothIcon,
   DocumentDuplicateIcon
 } from '@heroicons/react/24/outline'
+import {
+  ExternalLink as ExternalLinkIcon,
+  LogOut,
+  Settings
+} from 'lucide-react'
 import { useState } from 'react'
 import { useCopyToClipboard, useMedia } from 'react-use'
 import { twMerge } from 'tailwind-merge'
@@ -52,7 +54,10 @@ export function HeaderAccountPopover({
   }
 
   const headerItemsClassName =
-    'arb-hover flex w-full flex-row items-center space-x-2 px-12 py-2 text-sm sm:text-sm text-gray-4 sm:text-white hover:bg-ocl-blue sm:px-4 sm:py-1'
+    'arb-hover group flex w-full flex-row items-center space-x-2 px-12 py-2 text-sm sm:text-sm text-gray-4 sm:text-white hover:bg-gc-ink sm:rounded-pill sm:px-4 sm:py-1'
+  // Gully: 20px Lucide icons, muted by default, cyan on the active (hovered/focused) item
+  const headerIconClassName =
+    'text-gc-muted group-hover:text-gc-cyan group-focus-visible:text-gc-cyan'
 
   return (
     <Popover className="relative w-full px-4 sm:w-max sm:p-0">
@@ -133,7 +138,12 @@ export function HeaderAccountPopover({
                 href={`${getExplorerUrl(chain.id)}/address/${address}`}
                 className={headerItemsClassName}
               >
-                <ArrowTopRightOnSquareIcon className="h-3 w-3 text-white/60 sm:text-white" />
+                <ExternalLinkIcon
+                  size={20}
+                  strokeWidth={1.75}
+                  aria-hidden
+                  className={headerIconClassName}
+                />
                 <span>Explorer</span>
               </ExternalLink>
             )}
@@ -144,7 +154,12 @@ export function HeaderAccountPopover({
                 className={headerItemsClassName}
                 onClick={() => setQueryParams({ settingsOpen: true })}
               >
-                <Cog6ToothIcon className="h-3 w-3 text-white/60 sm:text-white" />
+                <Settings
+                  size={20}
+                  strokeWidth={1.75}
+                  aria-hidden
+                  className={headerIconClassName}
+                />
                 <span>Settings</span>
               </button>
             )}
@@ -154,7 +169,12 @@ export function HeaderAccountPopover({
               className={headerItemsClassName}
               onClick={() => disconnect()}
             >
-              <ArrowLeftOnRectangleIcon className="h-3 w-3 text-white/60 sm:text-white" />
+              <LogOut
+                size={20}
+                strokeWidth={1.75}
+                aria-hidden
+                className={headerIconClassName}
+              />
               <span>Disconnect</span>
             </button>
           </div>

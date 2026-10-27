@@ -5,6 +5,7 @@ import EclipseBottom from '@/images/eclipse_bottom.png'
 
 import { SiteBanner } from './SiteBanner'
 import { AppSidebar } from '../Sidebar/AppSidebar'
+import { GullyActivityProvider } from '../../gully/activity/GullyActivityContext'
 import { Toast } from './atoms/Toast'
 
 import { useMode } from '../../hooks/useMode'
@@ -38,20 +39,23 @@ export function Layout(props: PropsWithChildren) {
       />
       <div className="relative flex flex-col sm:min-h-screen">
         <div className="relative flex flex-row">
-          <AppSidebar />
+          {/* Gully: one live bridge-activity feed for the sidebar, the stat tiles and the ticker tape */}
+          <GullyActivityProvider>
+            <AppSidebar />
 
-          <main className="grow">
-            {/* 
+            <main className="grow">
+              {/* 
                 Warning: DO NOT remove the `SiteBanner` component. 
                 It also dynamically displays Arbiscan/Novascan status. 
                 To hide or remove its content, simply empty out its children instead of removing the entire component. 
               */}
-            <SiteBanner />
+              <SiteBanner />
 
-            {props.children}
-          </main>
+              {props.children}
+            </main>
 
-          <Toast />
+            <Toast />
+          </GullyActivityProvider>
         </div>
       </div>
     </div>

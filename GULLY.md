@@ -21,8 +21,8 @@ the EIP-1967 admin of the parent gateways (the rollup's `adminProxy`).
 Deploy on the gully-l3 box (only `/srv/gully-bridge` and the `gully-bridge` container):
 
 ```sh
-git archive --format=tar gully/testnet | ssh deploy@57.129.137.57 'rm -rf /srv/gully-bridge/src && mkdir -p /srv/gully-bridge/src && tar -x -C /srv/gully-bridge/src'
-ssh deploy@57.129.137.57 'cd /srv/gully-bridge/src && docker compose -f gully/compose.yaml up -d --build'
+git archive --format=tar <branch> | ssh deploy@57.129.137.57 'find /srv/gully-bridge -mindepth 1 -maxdepth 1 ! -name .deploy-logs -exec rm -rf {} + && tar -x -C /srv/gully-bridge'
+ssh deploy@57.129.137.57 'cd /srv/gully-bridge && docker compose -f gully/compose.yaml up -d --build'
 ```
 
 A WalletConnect id can be passed at build without committing it: `WALLETCONNECT_PROJECT_ID=<id> docker compose -f
@@ -30,18 +30,45 @@ gully/compose.yaml up -d --build` (compose forwards it as a build arg). Without 
 
 ## Branding layer (what the fork changes, and where)
 
+Brand: the **GullyChain brand kit** (`Desktop\GULLY LABS GRAPHICS\Gully Chain\brand-kit`: read its `CLAUDE_PROMPT.md`
+and `tokens.json`). The name is always written "GullyChain". Branch `gully/brand-v2` replaced the earlier Gully Labs
+frog/gold branding; the interim "kit v2" (Blue Crown) colours were replaced by this kit before it shipped.
+
 | What | Where |
 | --- | --- |
-| Name, links, tagline, "Powered by Arbitrum" credit | `packages/arb-token-bridge-ui/src/gully/brand.ts` |
-| Colours (kit tokens re-skin the upstream palette in place) | root `tailwind.config.js` (`theme.extend.colors`), CSS variables in `src/styles/tailwind.css` |
-| Fonts (Barlow, Barlow Condensed, JetBrains Mono) | `src/components/common/Font.ts` (keeps the upstream export `unica` and variable `--font-unica77`) |
-| Default theme (radius, widget background) | `src/hooks/useTheme.ts` |
-| Wallet modal theme | `src/components/App/AppProviders.tsx` |
-| Logos, icons, share image | `packages/app/public/brand/*` and `packages/app/public/*.png|ico|jpg`, written by `packages/app/scripts/brand-from-kit.mjs` from the Gully Labs brand kit |
-| Page title, meta, Open Graph | `packages/app/src/app/layout.tsx`, `packages/app/src/app/(bridge)/page.tsx`, `packages/app/public/manifest.json` |
+| Name, links, "Powered by Arbitrum" credit, read-only endpoints of the activity panel, kit asset paths | `packages/arb-token-bridge-ui/src/gully/brand.ts` |
+| Design tokens (night page, ink cards, blue, cyan, green, white, muted, chain gradient; derived hairline `--gc-line` and `--gc-down`; 22px card and pill radii) | `:root` in `src/styles/tailwind.css`, wired into Tailwind in the root `tailwind.config.js` (`gc-*` colours re-skin the upstream palette in place) |
+| Font (Exo 2, 600 UI / 800 headlines, one face for everything) | `src/components/common/Font.ts` (keeps the upstream export `unica` and variable `--font-unica77`), classes `.font-gully-*` in `tailwind.css` |
+| Header logo (kit `logo/gullychain-logo-transparent.png` at 40px), sidebar nav with Lucide icons, footer attribution and the "Powered by GullyChain" badge | `src/gully/GullySidebar.tsx` |
+| Signature buttons (pill, cyan/night primary, blue/white secondary, ghost tertiary, left icon, sliding arrow, shine sweep, 0.98 pressed) | `src/components/common/Button.tsx`, `.gc-shine` in `tailwind.css` |
+| Chart-led header: stat tiles with sparklines, transfers ticker tape (landing "Direction A: Terminal" language) | `src/gully/activity/GullyStatsStrip.tsx`, `GullyTape.tsx`, `sparkline.ts`, rendered by `MainContent.tsx` |
+| Bridge-flow stepper (Connect, Amount, Confirm, Track) | `src/gully/GullyStepper.tsx`, rendered by `MainContent.tsx` |
+| Kit toasts (bottom-right, ink surface, 22px, Lucide icon, cyan progress bar) | `src/components/common/atoms/Toast.tsx`, `.Toastify__*` in `tailwind.css` |
+| Nav icons (Lucide, 20px, stroke 1.75, muted/cyan active) | `TopNavBar.tsx`, `HeaderAccountPopover.tsx`, `Sidebar/AccountMenuItem.tsx`, `SettingsDialog.tsx`, `GullySidebar.tsx` |
+| Default theme (22px radius, ink widget background), wallet modal theme | `src/hooks/useTheme.ts`, `src/components/App/AppProviders.tsx` |
+| Icons, logo, badges, mascots, share image (kit section 1, copied byte for byte) | `packages/app/public/brand/{logo,badges,mascots}/*`, `public/favicon-16|32.png`, `favicon.ico`, `apple-touch-icon.png`, `android-chrome-192|512.png`, `og-image.png`, written by `packages/app/scripts/brand-from-kit.mjs` |
+| Head tags (kit section 2: favicons, `site.webmanifest`, theme colour, absolute OG image `https://bridge.gullychain.xyz/og-image.png`) | `packages/app/src/app/layout.tsx`, `packages/app/src/app/(bridge)/page.tsx`, `packages/app/public/site.webmanifest` |
+| Chain accent colour (`bridgeUiConfig.color`, cyan) | the Gully Chain Testnet record in `src/util/orbitChainsData.json` |
 
 Regenerate the brand assets with `node packages/app/scripts/brand-from-kit.mjs` (kit path defaults to
-`C:/Users/Admin/Desktop/GRAPHICS/Gully Labs`). Never redraw the logo: the script copies the kit masters byte for byte.
+`C:/Users/Admin/Desktop/GULLY LABS GRAPHICS/Gully Chain/brand-kit`). Never resize, recompress, recolour or crop a kit
+file: the script copies them byte for byte (the kit's done-check compares hashes).
+
+## GullyChain bridge activity panel
+
+`src/gully/activity/` (desktop: in the sidebar; phones: under the bridge panel). Live, read-only, no keys:
+
+| Data | Source |
+| --- | --- |
+| Block height and gas price ticker (every 4 s) | `https://testnet-rpc.gullychain.xyz` (`eth_blockNumber` + `eth_gasPrice`, batched) |
+| Deposits (Arbitrum Sepolia -> GullyChain): per-day chart, recent sizes chart, transfers list | `Bridge.MessageDelivered` + `Inbox.InboxMessageDelivered` on the public Arbitrum Sepolia RPC, read from block 322568124 in 50k-block chunks, cached in `localStorage`, topped up every 30 s. Kinds 12 (ETH deposit) and 9 (retryable: ETH, or token deposit with its gas funds) count; 3/11/13 do not. |
+| Withdrawals (GullyChain -> Arbitrum Sepolia) in the transfers list | `ArbSys.L2ToL1Tx` on the GullyChain RPC |
+
+The Gully indexer (`https://indexer.gullychain.xyz`, `/feed`, `/status`, `/head`) indexes L3 launches, trades, swaps and
+wraps, but no bridge data, hence the RPC reads. Charts: Recharts 2.15.4 (MIT, pinned) in the panel, inline-SVG sparklines in the stat tiles; single series, no
+legend, hover tooltips, animation off under `prefers-reduced-motion`; each chart has a visually hidden table with the
+same values. One `GullyActivityProvider` (mounted in `Layout.tsx`) feeds every surface, so the chains are polled once.
+Decoders and bucketing are pure functions in `bridgeActivity.ts` with unit tests (`bridgeActivity.test.ts`).
 
 ## How an Orbit chain is registered
 
@@ -93,4 +120,4 @@ outside production builds. They are upstream's test scaffolding; leave them alon
 `git fetch upstream && git merge upstream/master` into `gully/main`. The Gully changes are small edits to a handful of
 upstream files plus new files under `src/gully/`, `packages/app/public/brand/` and `packages/app/scripts/`. Likely
 conflict spots: `tailwind.config.js` (colour values), `Font.ts`, `layout.tsx`, `(bridge)/page.tsx`,
-`Header.tsx` and the sidebar wrappers.
+`Header.tsx`, `Button.tsx`, `TopNavBar.tsx`, `atoms/Toast.tsx` and the sidebar wrappers.

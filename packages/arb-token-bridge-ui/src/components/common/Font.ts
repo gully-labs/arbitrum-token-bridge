@@ -1,24 +1,16 @@
-import { Barlow, Barlow_Condensed, JetBrains_Mono } from 'next/font/google'
+import { Exo_2 } from 'next/font/google'
 
-// Gully brand fonts (Gully Labs brand kit): Barlow for body. The export keeps upstream's name, `unica`,
-// and its CSS variable, `--font-unica77`, so every existing reference (tailwind `font-unica77`, useTheme,
-// Layout, layout.tsx) now resolves to Barlow without being touched.
-export const unica = Barlow({
+// GullyChain brand font (brand-kit/tokens.json): Exo 2, 600 for UI and 800 for headlines. The export keeps
+// upstream's name, `unica`, and its CSS variable, `--font-unica77`, so every existing reference (tailwind
+// `font-unica77`, useTheme, Layout, layout.tsx) resolves to Exo 2 untouched.
+export const unica = Exo_2({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['500', '600', '800'],
   variable: '--font-unica77',
-  fallback: ['Roboto', 'sans-serif']
+  fallback: ['system-ui', 'sans-serif']
 })
 
-// Display: Barlow Condensed 700, uppercase. Labels: JetBrains Mono 500.
-export const gullyDisplay = Barlow_Condensed({
-  subsets: ['latin'],
-  weight: ['600', '700'],
-  variable: '--font-gully-display'
-})
-
-export const gullyMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['500'],
-  variable: '--font-gully-mono'
-})
+// One face for everything (the `.font-gully-*` classes in tailwind.css set the weights).
+export const gullyDisplay = unica
+export const gullyLabel = unica
+export const gullyNumbers = unica

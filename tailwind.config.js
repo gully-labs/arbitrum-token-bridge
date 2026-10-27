@@ -10,29 +10,36 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
+        // GullyChain kit gradient (tokens.json chainGradient) and derived fades
+        gcChain: 'linear-gradient(90deg,#00B2FA,#46FB04)',
+        gcMascotFade:
+          'linear-gradient(90deg, #05080D 40%, rgba(5,8,13,.6) 58%, transparent 80%)',
         gradient:
-          'linear-gradient(90deg, rgba(40, 160, 240, 0.5) 1.46%, rgba(239, 130, 32, 0.5) 98.51%)',
+          'linear-gradient(90deg, rgba(0, 178, 250, 0.5) 0%, rgba(70, 251, 4, 0.5) 100%)',
         gradientCctp: 'linear-gradient(95deg, #77E8CB 0%, #A199F7 100%)',
-        gradientCelebration: 'linear-gradient(to right, #1B4ADD6F, #E573106F)',
+        gradientCelebration: 'linear-gradient(to right, #00B2FA6F, #46FB046F)',
         highlight:
           'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.1) 75%, rgba(255, 255, 255, 0))'
       },
       colors: {
-        // GULLY BRAND (Gully Labs brand kit, tokens.css). Re-skins the upstream palette below in place;
-        // every upstream colour name is kept so merges stay conflict-light.
-        black: '#0D141C', // lab-night: page background
-        white: '#F4F2EC', // bone: text on dark
-        'lab-night': '#0D141C',
-        midnight: '#151D28',
-        slate: '#2A3542',
-        bone: '#F4F2EC',
-        'lab-gold': '#D9B563',
-        'pale-gold': '#F2D58A',
-        'frog-green': '#2F6B35',
+        // GULLYCHAIN BRAND (brand-kit/tokens.json). Re-skins the upstream palette below in place; every
+        // upstream colour name is kept so merges stay conflict-light.
+        black: '#05080D', // night: page ground
+        white: '#F2F5F7',
+        'gc-night': '#05080D',
+        'gc-ink': '#0A1018',
+        'gc-blue': '#2563FF',
+        'gc-cyan': '#00B2FA',
+        'gc-green': '#46FB04',
+        'gc-white': '#F2F5F7',
+        'gc-muted': '#8A97A8',
+        // derived (not in tokens.json): hairlines and the one "down" state
+        'gc-line': 'rgba(138, 151, 168, 0.18)',
+        'gc-down': '#FF8A80',
 
         // ACTION
-        error: '#CD0000',
-        'blue-link': '#D9B563',
+        error: '#FF8A80',
+        'blue-link': '#00B2FA',
 
         // PRIMARY
         cyan: '#DDEAFA',
@@ -40,41 +47,41 @@ module.exports = {
         orange: '#FFEED3',
         lime: '#E8FFE4',
         lilac: '#754562',
-        blue: '#00FBFF',
+        blue: '#00B2FA',
 
         // SECONDARY
-        'cyan-dark': '#11365E',
+        'cyan-dark': '#0E1726',
         'brick-dark': '#762716',
         'orange-dark': '#60461F',
-        'lime-dark': '#2F6B35',
+        'lime-dark': '#1F5A23',
 
         // TRANSACTION STATUS COLORS
-        claim: '#6AD28A',
-        retry: '#CD0000',
+        claim: '#46FB04',
+        retry: '#FF8A80',
         pending: '#CCB069',
 
         // NEUTRAL (GRAYS)
-        'gray-1': '#151D28',
+        'gray-1': '#0A1018',
         'gray-2': '#E5E5E5',
         'gray-3': '#DADADA',
         'gray-4': '#CCCCCC',
-        'gray-5': '#AEAEAE',
+        'gray-5': '#8A97A8',
         'gray-6': '#999999',
         'gray-7': '#BDBDBD',
-        'gray-8': '#2A3542',
+        'gray-8': 'rgba(138, 151, 168, 0.18)',
         'gray-dark': '#6D6D6D',
         'line-gray': '#F4F4F4',
-        dark: '#151D28', // (or default-black)
-        'dark-hover': '#1D2836', // (or default-black-hover)
+        dark: '#0A1018', // (or default-black)
+        'dark-hover': '#111A26', // (or default-black-hover)
 
-        'bg-gray-1': '#151D28',
+        'bg-gray-1': '#0A1018',
 
         // BRAND
-        'eth-dark': '#1A1C33',
-        'ocl-blue': '#243145',
-        'atmosphere-blue': '#152C4E',
-        'widget-background': 'var(--color-widget-background, #151D28)',
-        'primary-cta': 'var(--color-primary-cta, #D9B563)'
+        'eth-dark': '#0A1018',
+        'ocl-blue': '#111A26',
+        'atmosphere-blue': '#0E1726',
+        'widget-background': 'var(--color-widget-background, #0A1018)',
+        'primary-cta': 'var(--color-primary-cta, #00B2FA)'
       },
       spacing: {
         1: '5px',
@@ -111,9 +118,10 @@ module.exports = {
         80: '400px'
       },
       fontFamily: {
-        // Gully display face (Barlow Condensed 700, uppercase) and label face (JetBrains Mono); see Font.ts
-        gullyDisplay: ['var(--font-gully-display)', 'Barlow Condensed', 'sans-serif'],
-        gullyMono: ['var(--font-gully-mono)', 'JetBrains Mono', 'monospace'],
+        // GullyChain: one face, Exo 2 (kit tokens.json), 600 for UI and 800 for headlines; see Font.ts
+        gullyDisplay: ['var(--font-unica77)', 'Exo 2', 'sans-serif'],
+        gullyLabel: ['var(--font-unica77)', 'Exo 2', 'sans-serif'],
+        gullyNumbers: ['var(--font-unica77)', 'Exo 2', 'sans-serif'],
         unica77: ['var(--font-unica77)'],
         theme: ['var(--font-family, var(--font-unica77), Roboto, sans-serif)']
       },
@@ -130,7 +138,9 @@ module.exports = {
         8: '2rem'
       },
       borderRadius: {
-        DEFAULT: 'var(--border-radius, 6px)'
+        DEFAULT: 'var(--border-radius, 22px)',
+        card: '22px',
+        pill: '9999px'
       },
       borderWidth: {
         DEFAULT: 'var(--border-width, 1px)'
@@ -142,6 +152,15 @@ module.exports = {
         2: '0px 0px 1px 0px rgba(33, 37, 41, 0.08), 0px 2px 2px 0px rgba(33, 37, 41, 0.06)'
       },
       keyframes: {
+        // Gully: a new row in the live transfers list slides in (motion-safe only)
+        'gc-row-in': {
+          '0%': { opacity: 0, transform: 'translateY(-6px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' }
+        },
+        // Gully: the transfers ticker tape slides left (motion-safe only, paused on hover)
+        'gc-tape': {
+          to: { transform: 'translateX(-100%)' }
+        },
         'blink-pulse': {
           '0%, 100%': {
             opacity: 1
@@ -152,6 +171,8 @@ module.exports = {
         }
       },
       animation: {
+        'gc-row-in': 'gc-row-in 400ms ease-out 1',
+        'gc-tape': 'gc-tape 60s linear infinite',
         blink: 'blink-pulse 1s ease-in-out 1',
         blinkInfinite: 'blink-pulse 1s ease-in-out infinite'
       },

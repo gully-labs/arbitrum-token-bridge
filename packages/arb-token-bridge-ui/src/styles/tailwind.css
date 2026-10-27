@@ -6,34 +6,51 @@
 
 :root {
   --primary: transparent;
-  --secondary: #ffffff30;
-  --toastify-color-error: #cd0000;
+  --secondary: #f2f5f730;
+  --toastify-color-error: #ff8a80;
+  --toastify-color-dark: #0a1018;
+  --toastify-text-color-dark: #f2f5f7;
+  --toastify-color-progress-dark: #00b2fa;
+  --toastify-color-progress-info: #00b2fa;
+  --toastify-color-progress-success: #00b2fa;
+  --toastify-color-progress-warning: #00b2fa;
+  --toastify-color-progress-error: #00b2fa;
   --toastify-text-color-light: #1a1c1d;
   --toastify-text-color-info: #1a1c1d;
   --toastify-text-color-success: #1a1c1d;
   --toastify-text-color-warning: #1a1c1d;
   --toastify-text-color-error: #1a1c1d;
-  --toastify-font-family: var(--font-family, var(--font-unica77), Roboto, sans-serif);
+  --toastify-font-family: var(
+    --font-family,
+    var(--font-unica77),
+    Roboto,
+    sans-serif
+  );
   --toastify-toast-min-height: 44px;
-  --blue-link: #D9B563;
+  --blue-link: #00b2fa;
 
-  /* Gully brand tokens: copied from the Gully Labs brand kit (brand/tokens.css). Colours are wired
-     into Tailwind in the root tailwind.config.js; fonts in components/common/Font.ts. */
-  --gl-lab-night: #0D141C;
-  --gl-midnight: #151D28;
-  --gl-slate: #2A3542;
-  --gl-bone: #F4F2EC;
-  --gl-lab-gold: #D9B563;
-  --gl-pale-gold: #F2D58A;
-  --gl-frog-green: #2F6B35;
-  --gl-moss: #3C553B;
-  --gl-text-muted: #AEB5BE;
-  --gl-text-dim: #7D8794;
-  --gl-radius-btn: 6px;
-  --gl-radius-card: 16px;
+  /* GullyChain design tokens (brand-kit/tokens.json, CLAUDE_PROMPT.md section 3; also public/brand/tokens.css).
+     Colours are wired into Tailwind in the root tailwind.config.js, the font in components/common/Font.ts. */
+  --gc-night: #05080d;
+  --gc-ink: #0a1018;
+  --gc-blue: #2563ff;
+  --gc-cyan: #00b2fa;
+  --gc-green: #46fb04;
+  --gc-white: #f2f5f7;
+  --gc-muted: #8a97a8;
+  --gc-chain-gradient: linear-gradient(90deg, #00b2fa, #46fb04);
+  --gc-font: var(--font-unica77), 'Exo 2', system-ui, sans-serif;
+  /* derived, not in tokens.json */
+  --gc-line: rgba(138, 151, 168, 0.18);
+  --gc-down: #ff8a80;
+  --gc-text: #f2f5f7;
+  --gc-radius-card: 22px;
+  --gc-radius-pill: 9999px;
 }
 
-*:focus-visible, button:focus-visible, input:focus-visible {
+*:focus-visible,
+button:focus-visible,
+input:focus-visible {
   outline-color: white !important;
 }
 
@@ -72,11 +89,11 @@
   html {
     font-family: var(--font-family, var(--font-unica77), Roboto, sans-serif);
   }
-  
+
   body {
     font-family: var(--font-family, var(--font-unica77), Roboto, sans-serif);
   }
-  
+
   /* Ensure font is applied to all elements unless explicitly overridden */
   * {
     font-family: inherit;
@@ -87,15 +104,115 @@
 body {
   @apply min-h-screen;
   @apply bg-black;
-  font-weight: 300;
+  font-weight: 600;
 }
 
-/* Gully: display headings use Barlow Condensed 700 uppercase; labels use JetBrains Mono */
+/* GullyChain typography: one face, Exo 2 (kit tokens.json: weights 600 and 800) */
 .font-gully-display {
-  font-family: var(--font-gully-display), 'Barlow Condensed', sans-serif;
-  font-weight: 700;
+  /* Exo 2 800: headlines, big numbers */
+  font-family: var(--gc-font);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+.font-gully-label {
+  /* Exo 2 600, uppercase: badges, section labels */
+  font-family: var(--gc-font);
+  font-weight: 600;
   text-transform: uppercase;
-  line-height: 0.9;
+  letter-spacing: 0.05em;
+}
+.font-gully-numbers {
+  /* Exo 2 600, tabular: addresses, hashes, prices, block numbers */
+  font-family: var(--gc-font);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+/* The wordmark's "Chain": the kit gradient clipped to the text */
+.gc-wordmark-chain {
+  background-image: var(--gc-chain-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+/* Kit components */
+.gc-card {
+  background: var(--gc-ink);
+  border: 1px solid var(--gc-line);
+  border-radius: var(--gc-radius-card);
+  padding: 24px;
+}
+.gc-btn-primary {
+  border-radius: var(--gc-radius-pill);
+  min-height: 44px;
+  background: var(--gc-cyan);
+  color: #000000;
+  font-weight: 700;
+}
+.gc-btn-secondary {
+  border-radius: var(--gc-radius-pill);
+  min-height: 44px;
+  background: var(--gc-blue);
+  color: #f2f5f7;
+  font-weight: 700;
+}
+.gc-badge {
+  /* cyan on night (AA at 11px); the kit's blue with white text falls short of 4.5:1 at badge sizes */
+  border-radius: var(--gc-radius-pill);
+  height: 28px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  background: var(--gc-cyan);
+  color: var(--gc-night);
+}
+/* Stat-tile sparklines (GullyStatsStrip): bars and the end dot ease to new values */
+@media (prefers-reduced-motion: no-preference) {
+  .gc-spark rect,
+  .gc-spark circle {
+    transition: x 0.5s ease, y 0.5s ease, width 0.5s ease, height 0.5s ease,
+      cx 0.5s ease, cy 0.5s ease;
+  }
+}
+/* Signature button: a cyan (or white, on cyan) shine sweeps across on hover. Needs `relative overflow-hidden`. */
+.gc-shine::after,
+.gc-shine-light::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 60%;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(0, 178, 250, 0.45) 50%,
+    transparent 80%
+  );
+  transform: translateX(-200%);
+  pointer-events: none;
+}
+.gc-shine-light::after {
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 80%
+  );
+}
+.gc-shine:hover::after,
+.gc-shine-light:hover::after,
+.gc-shine:focus-visible::after,
+.gc-shine-light:focus-visible::after {
+  transform: translateX(300%);
+  transition: transform 0.7s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gc-shine::after,
+  .gc-shine-light::after {
+    display: none;
+  }
 }
 
 /*** HIDE NUMBER INPUT STEPS BUTTONS ****/
@@ -119,7 +236,7 @@ button:focus-visible,
 input:focus-visible {
   box-sizing: border-box;
   outline-offset: -2px;
-  outline: 2px solid rgb(0, 95, 204);
+  outline: 2px solid #00b2fa;
 }
 
 /*react error overlay hidden in dev mode while testing network switches which trow errors*/
@@ -127,10 +244,27 @@ body > iframe {
   display: none !important;
 }
 
-/* Toast styles */
+/* Toast styles (GullyChain kit: night surface, 1px line, 22px radius, cyan progress bar; see atoms/Toast.tsx) */
 .Toastify__toast-body {
   padding: 0;
   padding-bottom: 4px;
+}
+.Toastify__toast {
+  border: 1px solid rgba(138, 151, 168, 0.18);
+  border-radius: 22px;
+  padding: 14px 16px;
+  box-shadow: none;
+}
+.Toastify__toast-container--bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+.Toastify__close-button {
+  color: #8a97a8;
+  opacity: 1;
+}
+.Toastify__close-button:hover {
+  color: #f2f5f7;
 }
 
 .web3modal-modal-lightbox {
@@ -152,8 +286,9 @@ body > iframe {
 }
 
 .tippy-box[data-theme~='dark'] {
-  border-radius: 5px;
-  border: 1px solid #777;
+  border-radius: 12px;
+  border: 1px solid rgba(138, 151, 168, 0.18);
+  background: #0a1018;
 }
 
 /*

@@ -20,7 +20,7 @@ export const AppMobileSidebar: React.FC<React.PropsWithChildren> = () => {
                 title="Connect Wallet"
                 onClick={openConnectModal}
                 Icon={<PlusCircleIcon className="h-[24px] w-[24px] stroke-1" />}
-                className="border-primary-cta bg-primary-cta py-3 text-lab-night"
+                className="rounded-pill border-primary-cta bg-primary-cta py-3 font-bold text-black"
                 isMobile
               />
             )}

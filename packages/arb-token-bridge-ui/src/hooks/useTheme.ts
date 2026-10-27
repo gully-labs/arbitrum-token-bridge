@@ -4,9 +4,9 @@ import { unica } from '../components/common/Font'
 import { ThemeConfig } from '../util/queryParamUtils'
 
 export const defaultTheme: ThemeConfig = {
-  borderRadius: '6px', // Gully brand: 6px buttons
+  borderRadius: '22px', // GullyChain kit: 22px cards; 44px-high controls become pills
   borderWidth: '1px',
-  widgetBackgroundColor: '#151D28', // Gully brand: midnight
+  widgetBackgroundColor: '#0A1018', // GullyChain kit: ink (cards, surfaces)
   fontFamily: `${unica.style.fontFamily}, Roboto, sans-serif`
 }
 

@@ -1,29 +1,54 @@
 /**
- * Gully Bridge brand constants. Everything the Gully fork says about itself lives here, so upstream
+ * GullyChain Bridge brand constants. Everything the Gully fork says about itself lives here, so upstream
  * merges only ever touch the few call sites that import from this file.
- * Colours and fonts live in the theming layer (tailwind.config.js, styles/tailwind.css, Font.ts).
+ * Colours and fonts live in the theming layer (tailwind.config.js, styles/tailwind.css, Font.ts); the
+ * values come from the GullyChain brand kit (GULLY LABS GRAPHICS/Gully Chain/brand-kit, CLAUDE_PROMPT.md + tokens.json).
+ * The brand name is always written "GullyChain" (one word, capital G, capital C).
  */
 export const GULLY = {
-  name: 'Gully Bridge',
-  shortName: 'Gully Bridge',
-  tagline: 'Move assets between a Gully chain and its parent chain.',
+  name: 'GullyChain Bridge',
+  shortName: 'GullyChain Bridge',
   description:
-    'Gully Bridge moves assets between Gully chains and their parent chains. Built by Gully Labs on the Arbitrum token bridge.',
-  // Placeholder until the production domain is decided; used for Open Graph URLs only.
-  siteUrl: 'https://bridge.gullylabs.xyz',
-  themeColor: '#0D141C',
+    'Bridge assets between Arbitrum Sepolia and GullyChain Testnet. Built by Gully Labs on the Arbitrum token bridge.',
+  // Production origin for absolute OG/Twitter URLs (kit section 2), per the owner.
+  siteUrl: 'https://bridge.gullychain.xyz',
+  themeColor: '#05080D',
   links: {
-    website: 'https://gullylabs.xyz',
-    docs: 'https://docs.gullylabs.xyz',
+    website: 'https://gullychain.xyz',
+    explorer: 'https://testnet-explorer.gullychain.xyz',
+    labs: 'https://gullylabs.xyz',
     x: 'https://x.com/Gully_Labs',
     xHandle: '@Gully_Labs',
     github: 'https://github.com/gully-labs'
   },
   // Kept where upstream credits Arbitrum.
-  poweredBy: { label: 'Powered by Arbitrum', href: 'https://arbitrum.io' }
+  poweredBy: { label: 'Powered by Arbitrum', href: 'https://arbitrum.io' },
+  /** Read-only endpoints for the activity panel (public, no keys). The contract addresses mirror the
+   *  chain record in util/orbitChainsData.json (chain id 485590); the panel never writes anything. */
+  activity: {
+    chainRpcUrl: 'https://testnet-rpc.gullychain.xyz',
+    indexerUrl: 'https://indexer.gullychain.xyz',
+    parentRpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc',
+    parentExplorerUrl: 'https://sepolia.arbiscan.io',
+    bridge: '0x2073106fd3fc844Bbde31f5Bf0BB91cf1e2d6C8A',
+    inbox: '0x7B8499f1C058c9bdE2Bc9BdFEBE40364232C52B5',
+    fromBlock: 322568124
+  }
 } as const
 
-/** Kit master, byte for byte (see packages/app/scripts/brand-from-kit.mjs). */
-export const GULLY_LOCKUP_SRC = '/brand/gullylabs-logo-horizontal-on-dark.png'
-export const GULLY_MARK_SRC = '/brand/gullylabs-mascot-bust.png'
-export const GULLY_WORDMARK_SRC = '/brand/gullylabs-wordmark-on-dark.svg'
+/** Kit files, byte for byte (see packages/app/scripts/brand-from-kit.mjs). */
+export const GC_ICON_SRC = '/brand/gullychain-icon-transparent-512.png'
+/** The 3D logo with background removed, 1315x305: header/nav on dark, shown at height <= 152px, width auto. */
+export const GC_LOGO_SRC = '/brand/logo/gullychain-logo-transparent.png'
+export const GC_LOGO_SIZE = { width: 1315, height: 305 } as const
+/** "Powered by GullyChain" badge, native 189x56 (vector SVG, PNG fallbacks at 1x/2x/3x). */
+export const GC_BADGE_POWERED = {
+  svg: '/brand/badges/gullychain-powered-by-dark.svg',
+  srcSet:
+    '/brand/badges/gullychain-powered-by-dark.png 1x, /brand/badges/gullychain-powered-by-dark-2x.png 2x, /brand/badges/gullychain-powered-by-dark-3x.png 3x',
+  width: 189,
+  height: 56
+} as const
+/** Mascot "trader" (335x400) for the activity panel's settlement message. */
+export const GC_MASCOT_SRC = '/brand/mascots/gullychain-mascot-trader.png'
+export const GC_MASCOT_SIZE = { width: 335, height: 400 } as const
